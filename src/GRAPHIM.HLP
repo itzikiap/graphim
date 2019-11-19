@@ -1,0 +1,487 @@
+GRAPHIM V2.5- PROGRAMMED BY ITZHAK
+----------------------------------------------------
+        the help file.
+        the help topics are :
+                NoTopic      0
+                main         1
+                Exit         6
+                Return       7
+                Input        8
+                Graph        9
+                RangeX       10
+                RangeY       11
+                Ranges       12
+                AutoFit      14
+                LineWidth    15
+                ScreenRange  16
+                FunctionFill 17
+                ZoomBox      18
+                ContextMenu  19
+                compare      20
+                ResetRanges  21
+                Investigate  22
+                CoordBox     23
+                maingraph    30
+
+
+There are 12 lines in a page on normal resolution (640x480).
+In V2.2 I added line scrolling to the help.
+----------------------------------------------------
+topic 0 : NO TOPIC
+@9 tSORRY !
+  No help topic is available to this item
+end
+
+----------------------------------------------------
+topic 1 : INTRODUCTION
+@4 tARZONY GRAPHIM - the graph drawer.
+@12 tProgrammed by ITZHAK ARZONY.
+  GRAPHIM is a program in witch you can enter    þ
+  formula and get it's graph.                    þ
+  GRAPHIM is fully configurable.                 þ
+  Some setting you can change on the menus and   þ
+  some you can change in the file GRAPHIM.INI.   þ
+  Every menu item has its help,                  þ
+@14 thighlight a menu item and press F1.þ
+  for more information write in dos:             þ
+@5 tC:\GRAPHIM\>readme graphim.txt               þ
+@11 tPLEAS contact me: 054-570861
+end
+
+----------------------------------------------------
+topic 6 : Quit the program
+  Select this if you want to EXIT graphim.
+@8 tbut whay do you want to do this?
+end
+
+----------------------------------------------------
+Topic 7 : Return to main menu
+  Select this to return to main menu.
+  Don't press [ESC] - this will exit the program !
+end
+
+----------------------------------------------------
+topic 8 : Enter formula
+@4 tRULES
+@4 t-------
+  Here is an example for a formula :
+@12 t                  5Xý+(x+5)(x-4) þ
+@12 t             Y = ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄþ
+@12 t                      3(5+7x)    þ
+  You can't write the formula the way it look above,þ
+  You must write it like this :                     þ
+
+@12 tY = {5*x^2+(x+5)*(x-4)}/{3*(5+7*x)}
+  It may look complicated, But its acctually not.   þ
+
+@9 tThe elements of the formula :
+  {[(,)]}   -                  brackets
+  ^         -       power of(X^2 is Xý)
+  *,/       -         multiply , divide
+  +,-       -            add , subtract
+  X         -   the independet variable
+  FUNCTION  -  a function like SIN, COS
+  All other characters will be ignored.
+
+
+
+
+@9 tRemarks:
+  You might get some unexpected results, þ
+  or a crush of the program,             þ
+  if you write a very big number.        þ
+  that because there should be some bugs.þ
+
+@7 tDont worry, in the latest releas I þ
+@7 thave fixed Lots of bugs.           þ
+
+
+
+
+@4 tTHE INPUT FORMULA SCREEN
+  We have 3 boxes:
+  1)input box: enter the formula as above             þ
+          (use the conventional editting keys)        þ
+  2)preview box: the drawing of the graph             þ
+          For zooming press the left mouse button and þ
+          drag it back and fore.                      þ
+          For panning move the mouse.                 þ
+  3)translate box: how the computer understand        þ
+          the formula                                 þ
+
+
+@4 tMATHEMATICAL FUNCTIONS
+  Lets start with an example:
+@12 tY = 3*x^2+COS X
+@2 tThe COS is the function.
+  The syntax is: SIN X The function -> the expressionþ
+  If you want to calculate the SIN of en expression  þ
+  with -,+,*,/ you must put the whole expression     þ
+  in brackets:                                       þ
+@12 tY = sin (3x+5x^2)
+
+
+
+@4 tThe list of FUNCTIONS
+  SIN   - SINUS.          - F1
+  COS   - COSINUS.        - F2
+  ABS   - ABSOLUTE VALUE. - F3
+  SQR   - SQWER ROOT      - F4
+  TAN   - SIN/COS         - F5
+  COTAN - COS/SIN         - F6
+  LN    - NAT. LOGARITHM  - F7
+  PI    - PI(3.14..) * ?? - F8
+  E     - E(2.17..)  ^ ?? - F9
+
+@9 tI'LL ADD MORE FUNCTIONS SOON.
+@9 tRemark:
+  If you want to use the PI as a number and make         þ
+  calculation with it, for example: PI / 2, write PI1.   þ
+  The reason is that the program automatically multply PIþ
+  with the next argument, so PI/2 is acctually PI*/2.    þ
+  This will make unexpected results.                     þ
+
+
+@13 twrite in DOS ---¯> SETUP GRAPHIM.INI
+@13 t-=ð SEE GRAPHIM.TXT FOR MORE INFORMATION ð=-
+end
+
+----------------------------------------------------
+topic 9 : DRAWING THE GRAPH
+@4 tOVERVIEW
+  After you have entered the formula in the   þ
+  ENTER FORMULA screen you can now see the    þ
+  calculated graph.
+@4 tZOOMIN AND PANNING
+  To PAN around the graph, use the arrow keys. þ
+  To ZOOM IN, press PAGE-UP.                   þ
+  To ZOOM OUT, press PAGE-DOWN.                þ
+  To streach or condence the X-axis use        þ
+  CTRL+LEFT/RIGHT arrows.                      þ
+  R will restore the default ZOOM and PAN.     þ
+  If the ZOOM&PAN aren't smooth press T        þ
+@4 tTHE COORDINATE BOX
+  Moving the mouse will enter you to           þ
+  the coordinate box.                          þ
+  On the screen apear a cross (Å).             þ
+  The coordinates of the cross are shown       þ
+  in the box on the top of the screen.         þ
+  You can drag this box if it hidhing importentþ
+  part of the graph.                           þ
+        Press F1 inside the Coordinates Box modeþ
+        to get more help about the features     þ
+
+
+
+@4 tTHE CONTEXT MENU
+  To enter the CONTEXT MENU just press anywere þ
+  in the graph with the RIGHT mouse button.    þ
+  Or press the 'M' key.                        þ
+
+@2 tTo see a description of the menuþ
+@2 tselect HELP inside the menu.    þ
+end
+
+----------------------------------------------------
+topic 10 : Axis X range.
+@4 tOVERVIEW
+  The graph has 2 axes:                     þ
+  the HORIZONTAL axis and                   þ
+  the VERTICAL axis.                        þ
+  The horizontal axis is called THE X AXIS. þ
+@4 tINSTRUCTION
+  Enter here the minimum or the maximum of  þ
+  the X axis.                               þ
+  Defaults are -20 to 20.                   þ
+  You can use the conventional editing keys.þ
+end
+
+----------------------------------------------------
+topic 11 : Axis Y range.
+@4 tOVERVIEW
+  The graph has 2 axes:                     þ
+  the HORIZONTAL axis and                   þ
+  the VERTICAL axis.                        þ
+  The vertical axis is called THE Y AXIS.   þ
+@4 tINSTRUCTION
+  Enter here the minimum or the maximum of  þ
+  the Y axis.                               þ
+  Defaults are -20 to 20.                   þ
+  You can use the conventional editing keys.þ
+end
+
+----------------------------------------------------
+topic 12 : GRAPH RANGES
+@4 tOVERVIEW
+  The graph has 2 axes:                     þ
+  the HORIZONTAL axis and                   þ
+  the VERTICAL axis.                        þ
+  The vertical axis is called THE Y AXIS.   þ
+  The horizontal axis is called THE X AXIS. þ
+@4 tINSTRUCTION
+  You can enter all the ranges together     þ
+  Or seperetly enter one or two or three    þ
+  of them                                   þ
+  You can use the conventional editing keys.þ
+@13 twrite in DOS ---¯> SETUP GRAPHIM.INI
+end
+
+----------------------------------------------------
+topic 14 : AUTO FIT
+@4 tOVERVIEW
+  Usualy the graph line is not exactly inside     þ
+  the graph box.                                  þ
+  It's usualy above or under the Y range.         þ
+  When AUTO FIT is on, GRAPHIM calculate the      þ
+  absolute minimum and maximum for the X range,   þ
+  and set it to be the Y range.                   þ
+
+@9 tExample
+        take for example the                                þ
+        default parabula with the default range:            þ
+        From -20 to -4.5 the graph line is not visiable.    þ
+        From -4.5 to 4.5 you can see a parabula.            þ
+        From -4.5 to 20 the graph line is not visiable.     þ
+        The first and last section are not visiable because þ
+        The function for that X is grater then -20 (Min Y)  þ
+        (e.g : -5 ^ 2 = 25 and 5 ^ 2 = 25)                  þ
+        When AUTO FIT is on, GRAPHIM go's from -20 to 20    þ
+        and calculate the formula for that X, like it does  þ
+        always, but now it alsow remembers the highest      þ
+        and lowest values and it uses them for the Y range. þ
+@13 twrite in DOS ---¯> SETUP GRAPHIM.INI
+end
+
+----------------------------------------------------
+topic 15 : Graph Line Width
+  Select the width of the line you want      þ
+  to use in the graph.                       þ
+  Yuo have 3 options : normal,thik,very thik
+  write in DOS ---¯> SETUP GRAPHIM.INI
+end
+
+----------------------------------------------------
+topic 16 : Screen Range
+  Normaly the graph is drawn all over the screen.    þ
+  You can set it to be drawnm on part of the screen. þ
+  This is good for comparing between two graphs.     þ
+  But now you have the COMPARE option,               þ
+  So ..... I dont know for what this is good.        þ
+end
+
+----------------------------------------------------
+topic 17 : Function Area Fill
+  To see the area of the graph more clearly, you canþ
+  set this option on.                               þ
+  This will FILL the area between the graph line    þ
+  and the axes.                                     þ
+@13 twrite in DOS ---¯> SETUP GRAPHIM.INI
+end
+
+----------------------------------------------------
+topic 18 : Zoom Box
+  The zoom box give you the ability to zoom in    þ
+  to part of the graph.                           þ
+  Just move or size the box and press enter,      þ
+  the RANGES of the box will apear in full screen.þ
+@12 t  ACTION        -   KEYBOARD   -  MOUSE   þ
+@12 t------------------------------------------þ
+  SHRINK        -   PAGE UP    -  DRAG FORWARD þ
+  GROW          -  PAGE DOWN   -  DRAG BACKWORDþ
+  CHANGE ASPECT -  ..........  -  DRAG TO SIDE þ
+  MOVE          -  ARROW KEYS  -  MOVE         þ
+  MOVE FASE     -  CTRL+ARROW  -  .............þ
+  ACCEPT        -  ENTER       -  RIGHT CLICK  þ
+  REJECT        -  ESC         -  .............þ
+
+@14 In V1.3 it's finally work(!) ...
+
+  I added a preview of the graph to make it easierþ
+  to explore. If you dont like it, just press F2. þ
+
+  Zoom Out is done by growing the Zoom Box out of þ
+  the screen.                                     þ
+end
+
+----------------------------------------------------
+topic 19 : Graph Menu
+@14 tDescription of the items:
+@14 t-------------------------
+  Save         - Saves the graph parameters in a file þ
+  Restore      - Restore the graph from the file      þ
+  Save BMP     - Save the graph picture in BMP format þ
+  AutoFit      - Automaticaly fits the Y ranges       þ
+  FunctionFill - Tuggle FunctionFill                  þ
+  ShowAxes     - Tuggle Axes                          þ
+  AxesLables   - Tuggle Axes numbers                  þ
+  Ranges       - Let you enter the ranges             þ
+  ZoomBox      - Get you inside the zoom box          þ
+  ResetRanges  - Reset the ranges to the default      þ
+  CompareMode  - Lets you enter formula to compare    þ
+  Investigate  - Colorize the graph and writes MIN/MAXþ
+  Calibarate   - Calibarate the timing                þ
+
+@14 tAvailable keys:
+@14 t---------------
+  R        - RESTORE ZOOM
+  A        - AUTO FIT
+  I        - INVESTIGATE
+  F        - FUNCTION FILL
+  X        - HIDE AXES
+  Z        - ZOOM BOX
+  T        - CALIBRATE TIMING
+  M        - ENTER MENU
+  L        - HI RES DRAW
+  C        - COLORIZE
+  S        - SAVE GRAPH
+  Enter    - LOAD GRAPH
+  '`'      - SAVE BITMAP
+  Space    - INPUT FORMULA
+  '='      - COMPARE MODE
+  Esc      - BACK TO MAIN SCREEN
+
+  BITMAP formart is themost common picture format.
+  When saving the graph picture in bitmap format
+  you can import it to WORD, use it as a wallpaper,
+  edit it in a picture editor (such as PaintBrush)
+  or even convert it to WMF - if you have an OCR
+  available. Off coarse that once you have it -
+  you can print it.
+end
+
+----------------------------------------------------
+topic 20 : Compare
+@9 tThis feature let you compare between 2 functions þ
+  the rules are the same as enter formula.           þ
+  This operation is actualy draws the new formula    þ
+  on top of the old one. You will continue working   þ
+  with the old formula.                              þ
+  The program will continue sowing both of the graphsþ
+  (your one is the defauld color(yellow), the        þ
+  computer's is the dark pink one) after you zoom    þ
+  or pan. To stop comparing, remove the * from the   þ
+  'COMPARE MODE *' command in the graph menu         þ
+@12 tCAUTION
+
+@14 tIf the screen scramble after you zoom þ
+@14 ttry pressing X several times.         þ
+end
+
+----------------------------------------------------
+Topic 21 : Reset Ranges
+  This option let you determine if the program     þ
+  will reset the ranges after exiting the graph to þ
+  the main menu (-20,20)-(-20,20)                  þ
+  or leav it just as you left it when you exited.  þ
+end
+
+----------------------------------------------------
+Topic 22 : Colorize graph
+@12 tColorization of the graph line (V1.4)
+  When looking from left to right, we see that
+  the graph has 3 states:
+  Go Up:     /
+  Go Down:   \
+  Peak: /-\ or vally: \_/
+  Investigation colorize the graph according
+  to the state.
+end
+
+----------------------------------------------------
+Topic 23 : The Coordinate Box
+@6 tOverview
+  The Coordinate Box Mode is acctually the main mouse
+  interface of the graph mode.
+  From the Coordinate Box Mode (that is called that
+  way Due to historical reasons)
+@3 tYou can do the folowing things:
+  See the coordinate of the mouse cursor moving around
+  the graph.
+  See the formula of the graph and EVEN CHANGE IT!
+  Enter the Zoom Box via the mouse.
+  Enter the graph menu.
+
+@6 tThe Screen
+  The screen will not change drastically, except that
+  Now you will see two boxes floating at the top of
+  The screen.
+@3 tThe upper box
+  shows you thee coordinates of the mouse pointer.
+  Moving the mouse around will update The Coordinates.
+  By default, the mouse will stick to the graph. That
+  way you see the EXACT result of the formula for the
+  cuurent X value of the mouse, REGARDLES of the Y
+  resolution.
+
+  Under the Coordinate box you will see a small box
+  with the formula. Its good in case you have forgotten
+  it, or just restored a saved formula.
+
+@6 tThe Interface
+
+  Beside moving the mouse around to see the
+  Coordinates you can do the folowing things:
+  First of all, to disable the mouse snapping you
+  need to press the middle button of the mouse. Now
+  you can move it freely around the graph. Pressing
+  it again will re-enable the automatic snapping.
+@7 tYou can press the coordinates box and drag it
+  to move it to another location (good if it hiding
+  important part of the graph). the formula box will
+  move with it. If you want to hide the formula box,
+  just press it.
+@7 tYou can Change the formula directly inside the box
+  without exiting to the main menu! Just press it
+  with the Right mouse button.
+  The formula box will grow and you'll see the input
+  line in it. You can use all the normal editing keys
+  to change the formula. By pressing enter you confirm.
+  The graph will automatically update!
+@7 tDragging the mouse anywhere in the graph
+  will take you to the Zoom Box. Press F1 while in it
+  to see help on it.
+  Pressing the right button will take you to the graph
+  menu.
+end
+
+----------------------------------------------------
+Topic 30 : The Main Graph Window
+@6 tOVERVEIW
+  (V2.3)This is a new way to interface with the computer.
+  It based on the same method windows works, just
+  a little bit simpler (not by much).
+  All the functions are self explanetory (what a word...).
+  Uses:
+  -Press with the left mouse to activate the
+    ZoomBox.
+  -Press with the right mouse to tuggle SNAP MOUSE.
+  -Press the middle button of the mouse to instantly
+    zoom into the graph. If you want to instanly pan -
+    press ALT while klicking the middle mouse.
+  The 'Z' and 'P' are the exploration bottons - for Zoom
+  and Pan, off coars. Again - ALT will trade the functions
+  with each other
+
+  (V2.5)The Info box in the upper right corner of the screen
+  can show useful information, just press on it and it will
+  cycle thru the inf modes:
+  Coordinates -> Formula -> Calculated area ->
+  Program Version -> X min/max -> Y min/max
+  
+  (V2.4) There is now full integration between the active
+  formula and the compared one. you can swich betwin them
+  and much more.
+
+@14 tMenu items:
+  - Formula > "Invert(1/f)" : give you the inverted form of
+      a formula. X^2 <-> 1/(X^2)
+  - Formula > "Compared"    : Swich bitween active and compared
+      formula.
+  - Formula > "Last Func"   : Undo.
+  - Inspect > "Settings"    : Things to show on screen when
+      inspecting. Can be set permanently in GRAPHIM.INI.
+
+  have fun...
+
+@1 tPress Alt+F1 for more functions help
+end

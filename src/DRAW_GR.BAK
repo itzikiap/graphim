@@ -1,0 +1,595 @@
+unit draw_gr;
+{ Draws the graph - for use in GRAPHIM }
+
+{          NOT COMPLETED FOR V2.6      }
+{ - implement all the compare functions (V)}
+{ - Complete the PLOT procedure         (V)}
+{ - problems with displaying the small previews (V)}
+{ - division by zero error in ZB and Input      }
+{ - try to dispose unset com in ZB and Input    }
+
+interface
+uses exbox,drivers,general,graph,bituy,set_gr,boxes,errors,help,virt_bx;
+
+type
+  PointsArray=array[0..1024] of real;
+
+  pgraph=^dgraph;
+  { an object to encapsule the graph calculating }
+  { it calculates the graph and convert it to screen points }
+  dgraph=object(bp)
+    sum:extended;
+    resolution:byte; { 1 is best resolution - increase for fast draw }
+		points:PointsArray; { the points on the screen }
+		linecolor:byte;
+    constructor init;
+    procedure sets(st:string); virtual;
+    function calculate(minx,maxx:extended;xstep,ystep:extended):boolean;
+    procedure cautofit(minx,maxx:extended;xstep,ystep:extended;var miny,maxy:real);
+    destructor bye;
+  end;
+
+	draw=object(virtbox) { draw the graph on the screen }
+    form:pgraph;
+    Erasef:boolean; { ON only when whant to erase. Use with causion }
+    HighDetilesRatio:byte;
+    resolution:byte;
+		isfirst:boolean;
+		ToFill:boolean;
+		FillColor:byte;
+    FillColorize:boolean; { set TRUE to colorize the graph according to its location relative to X axis }
+    FillMode:boolean; { set TRUE to fill from the buttom of the screen. otherwise from the X axis }
+    fastdraw:boolean; { only plot the dots }
+		individual:boolean; { set false to compere 2 or more graphs }
+		autofit:boolean;
+    DrawOnAssign:boolean;
+		axes_text:boolean;
+    no_axes:boolean; { if TRUE - dosnt show axes }
+{    private}
+    comp : array [1..4] of pgraph; { if I can then Y not? }
+    CompNum:byte; { the number of comps }
+    CompLink:boolean; { To draw them ? }
+		public
+		constructor init(sx1,sy1,sx2,sy2:integer); { initialize the graph, and the varibles }
+		procedure assign(nminx,nmaxx,nminy,nmaxy:extended); virtual;{ assign new X and Y - 0 is unchanged }
+		procedure getready; { reading things for first time drawing }
+		procedure display; virtual; { displays the graph }
+    function Freecomp(what:byte):boolean; { implemented more then one comp }
+    function setcomp(new_comp:string):boolean; { set the formula to compare }
+    function tugglecomp:boolean; { tuggle to display or not display the comp's }
+		procedure calculate(what:byte); { calculates xmin,xmax,ymin,ymax,points,step }
+		procedure setmcolor(gcolor,fcolor,bcolor:byte); { the graph colors }
+		procedure setfunc(new_func:string); { insert another function }
+		procedure setautofit(isaf:boolean); { set the local autofit }
+		procedure draw_axes; { draws the axes }
+    procedure plothigh; { draws the graph with hi detiles }
+		procedure plot(what:byte); { draws the graph (WHAT is the comp to plot. 0 to form) }
+		destructor bye; virtual;
+	end;
+
+procedure doTheHelp(helpnum:word);
+procedure espace(var st:string);
+implementation
+
+procedure doTheHelp(helpnum:word);
+var thehelp:helpbox;
+begin
+	with thehelp do begin
+		init('graphim.hlp',helpnum);
+		if good then userinterface;
+		done;
+	end;
+end;
+
+{*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*}
+{*         GRAPH OBJECT PROCEDURES           *}
+{*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*}
+constructor dgraph.init;
+var i:integer;
+begin
+	for i := 0 to swidth do points[i]:=0;
+  resolution := 1;
+  inherited init;
+end;
+
+{ ************************************* }
+{ Assign a new formula and get it ready }
+procedure dgraph.sets;
+var i:integer;
+begin
+	for i := 1 to 1024 do points[i] := 0;
+  inherited sets(st);
+	dobp;
+end;
+
+{ *********************************** }
+{ calculate the graph into the points }
+{ The points are in VIRTUAL plane     }
+function dgraph.calculate;
+var i:integer;
+	temp2,temp3,temp4:extended;
+begin
+	sum:=0;
+	temp3:=minx;
+  i:=1;
+  while temp3 < maxx do begin
+		if i mod resolution = 0 then temp4:=bp.calc(temp3);
+    points[i]:=temp4; { the point is related to 0 }
+    sum := sum+abs(temp4)*xstep;
+		if ioresult <> 0 then begin
+			errfunction := 'CALCULATE GRAPH at point: '+stry(temp3,0,2);
+			fatalerror(erroverflow);
+		end;
+  	inc(i,1);
+		temp3:=temp3+xstep;
+	end;
+end;
+
+{ *********************************** }
+{ Gives you the autofit calculation   }
+procedure dgraph.cautofit;
+var
+	temp2,temp3,temp4:extended;
+  i:integer;
+begin
+	temp3:=minx;
+  if miny > maxY then autofit := true else exit;
+  i:=1;
+  while temp3 < maxx do begin
+		if i mod resolution = 0 then temp4:=bp.calc(temp3);
+		if autofit then begin
+			if miny > temp4 then miny := temp4;
+			if maxy < temp4 then maxy := temp4;
+		end;
+		temp3:=temp3+xstep;
+ 		inc(i,1);
+	end;
+	if miny = maxy then begin
+		miny:=miny-1;
+		maxy:=maxy+1;
+	end;
+{	ystep:=(maxy-miny)/(y2-y1);}
+end;
+
+{ *********************************** }
+destructor dgraph.bye;
+begin
+	inherited bye;
+end;
+
+{*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*}
+{*          DRAW OBJECT PROCEDURES           *}
+{*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*}
+constructor draw.init;
+{ put zeros in all the varibles }
+var
+	i:integer;
+begin
+	virtbox.init(sx1,sy1,sx2,sy2);
+	axes_text    := true;
+	individual   := true;
+	isfirst      := true;
+  fastdraw     := false;
+  no_axes      := false;
+  erasef       := false;
+  DrawOnAssign := false;
+  keepaspect   := false;
+  fillmode     := false;
+  resolution   := 1;
+	Autofit      := Set_gr.autofit;
+	ToFill       := FunctionFill;
+	fillcolor    := graphfill;
+	compnum      := 0;
+  HighDetilesRatio := HighResPlotRatio;
+  new(form);
+	form^.init;
+  for i := 1 to 4 do comp[i] := nil;
+  Fillcolorize:=Fill2Colors;
+	assign(defaultminx,defaultmaxx,defaultminy,defaultmaxy);
+	getready;
+	setmcolor(graphcolor,graphaxes,graphback);
+	set3D(off,off);
+end;
+
+procedure draw.assign;
+{ assign new values to X and Y }
+var temp:extended;
+begin
+	if autofit then begin
+		miny:=999999999;
+		maxy:=-999999999;
+		ystep := 0;
+	end else begin
+		if nminy <> 0 then miny := nminy;
+		if nmaxy <> 0 then maxy := nmaxy;
+		if miny > maxy then begin
+			temp := miny;
+			miny := maxy;
+			maxy := temp;
+		end else if miny = maxy then begin
+			miny := defaultminy;
+			maxy := defaultmaxy;
+		end;
+		ystep:=(maxy-miny)/(y2-y1);
+	end;
+	if nminx <> 0 then minx := nminx;
+	if nmaxx <> 0 then maxx := nmaxx;
+	if minx > maxx then begin
+		temp := minx;
+		minx := maxx;
+		maxx := temp;
+	end else if minx = maxx then begin
+		minx := defaultminx;
+		maxx := defaultmaxx;
+	end;
+	xstep:=(maxx-minx)/(x2-x1);
+	autofit := off;
+	if DrawOnAssign and displayed then display;
+end;
+
+procedure draw.setfunc;
+{ set a new function }
+begin
+	form^.sets(new_func);
+	getready;
+end;
+
+function draw.setcomp;
+{ set the formula to compare           }
+{ incres the number of the comp number }
+{ DILEMA - in case of compnum=4.       }
+{ to ignor or to change the first one? }
+{ now ignoring                         }
+begin
+  if compnum = 4 then setcomp := false
+  else begin
+  	inc(compnum);
+		new(comp[compnum]);
+    with comp[compnum]^ do begin
+			init;
+      sets(new_comp);
+			convert;
+			doBP;
+      linecolor := compnum+3;
+		end;
+    complink := true;
+    setcomp := true;
+  end;
+end;
+
+function draw.freecomp;
+{ free up the specified comp formula         }
+var
+	i:integer;
+begin
+	if (compnum < 1) or (what < 0) or (what > maxcompare) or (comp[what] = nil) then freecomp := false
+  else begin
+    if what = 0 then what := compnum;
+    comp[what]^.bye;
+    dispose(comp[what]);
+    comp[what] := nil;
+  	for i := what to compnum do begin
+    	if comp[i] <> nil then
+				if comp[i-1] = nil then begin
+        	comp[i-1] := comp[i];
+          comp[i] := nil;
+        end;
+    end;
+    dec(compnum);
+    freecomp := true;
+  end;
+end;
+
+function draw.tugglecomp;
+{ Tuggle the complink       }
+begin
+	if compnum > 0 then complink := not complink;
+  tugglecomp := complink;
+end;
+
+procedure draw.setautofit;
+{ set the local autofit }
+var st:string;
+begin
+	if autofit <> isaf then begin
+    erase;
+{		form^.gets(st);
+		form^.sets('');}
+		autofit := isaf;
+{		form^.sets(st);}
+		getready;
+	end;
+end;
+
+
+procedure draw.getready;
+{ ready to draw }
+var temp2:real;
+	st:string;
+begin
+  with form^ do begin
+		if dest.IsEmpty then begin
+	 		convert;
+			doBP;
+  		gets(activeformula);
+	  end;
+  end;
+	if minx > maxx then begin
+		temp2:=minx;
+		minx:=maxx;
+		maxx:=temp2;
+	end else
+	if minx=maxx then begin
+		minx:=defaultminx;
+		maxx:=defaultmaxx;
+	end;
+	if minx=maxx then begin
+		minx:=-20;
+		maxx:=20;
+	end;
+	xstep:= (maxx-minx)/(x2-x1);
+	if not AutoFit and (miny>=maxy) then autofit:=true;
+	if autofit then begin
+		miny:=9;
+		maxy:=-9;
+	end;
+	form^.cautofit(minx,maxx,xstep,ystep,miny,maxy);
+end;
+
+procedure draw.display;
+{ displays the graph }
+var
+	oldx,oldy:byte;
+  i:byte;
+begin
+  oldx := XAxisTickSpace;
+  oldy := YAxisTickSpace;
+	if individual then box.display;
+  draw_axes;
+	calculate(0);
+	plot(0);
+  if tofill then   draw_axes;
+	if complink and not(fastdraw) then begin
+  	for i := 1 to compnum do begin
+			calculate(i);
+      plot(i);
+    end;
+  end;
+  if fastdraw then begin
+		XAxisTickSpace := 130;
+		YAxisTickSpace := 150;
+  end;
+{	if individual then draw_axes;}
+  XAxisTickSpace := oldx;
+  YAxisTickSpace := oldy;
+end;
+
+procedure draw.setmcolor;
+{ set the colors of the graph }
+begin
+	box.setmcolor(fcolor,bcolor);
+	form^.linecolor := graphcolor;
+end;
+
+procedure draw.calculate;
+{ calculate the graph for all x }
+var i:integer;
+{	temp:array[0..800] of real;}
+	temp2,temp3,temp4:extended;
+  f:pgraph;
+begin
+{$I-}{$R-}{$Q-}
+	getready;
+	isfirst:=false;
+  if what=0 then f:=form else begin
+		f:=comp[what];
+    autofit := false;
+  end;
+	ystep:=(maxy-miny)/(y2-y1);
+  if autofit then f^.cautofit(minx,maxx,xstep,ystep,miny,maxy);
+  f^.calculate(minx,maxx,xstep,ystep);
+	AutoFit:=false;
+end;
+
+procedure draw.draw_axes;
+{ draws the axes on the screen }
+var i:integer;
+	temp:integer;
+	SXstep,SYstep:integer;
+
+begin
+  if no_axes then exit;
+	if erasef then setcolor(bkColor) else setcolor(color);
+{	setviewport(vx1,vy1,vx2,xy2,true);}
+	setlinestyle(0,0,1);
+	SXstep:=XaxisTickSpace;
+	SYstep:=YaxisTickSpace;
+	if axes_text then settextstyle(2,0,(x2-x1) div 160 + 1);
+	{ the Y axis }
+	if minx > 0-xstep*2 then begin
+		i:=y1;
+		if axes_text then settextjustify(lefttext,centertext);
+		while i <= y2 do begin
+			line(x1+1,y1+y2-i,x1+2,y1+y2-i);
+			if axes_text then outtextxy(x1+3,y1+y2-i,stry(SYtoY(y2-i+y1),2,2));
+			inc(i,SYstep);
+		end;
+	end else if maxx < 0+xstep*2 then begin
+		if axes_text then settextjustify(righttext,centertext);
+		i:=y1;
+		while i <= y2 do begin
+			line(x2-2,y1+y2-i,x2,y1+y2-i);
+			if axes_text then outtextxy(x2,y1+y2-i,stry(SYtoY(y2-i+y1),2,2));
+			inc(i,SYstep);
+		end;
+	end else begin
+		temp:=XtoSX(0);
+		line(temp,y1,temp,y2);
+		if axes_text then settextjustify(righttext,centertext);
+		i:=y1;
+		while i <= y2 do begin
+			line(temp-2,y1+y2-i,temp+2,y1+y2-i);
+			if axes_text then outtextxy(temp,y1+y2-i,stry(SYtoY(y2-i+y1),0,2));
+			inc(i,SYstep);
+		end;
+	end;
+	{ the X axis }
+	if maxy < 0+ystep*2 then begin
+		i:=x1;
+		if axes_text then settextjustify(centertext,toptext);
+		while i <= x2 do begin
+			line(i,y1+2,i,y1);
+			if axes_text then outtextxy(i,y1+3,stry(SXtoX(i),2,2));
+			inc(i,SXstep);
+		end;
+	end else if miny > 0-ystep*2 then begin
+		i:=x1;
+		if axes_text then settextjustify(centertext,bottomtext);
+		while i <= x2 do begin
+			line(i,y2-2,i,y2);
+			if axes_text then outtextxy(i,y2-3,stry(SXtoX(i),2,2));
+			inc(i,SXstep);
+		end;
+	end else begin
+		temp:={y2-}YtoSY(0){+y1};
+		line(x1+1,temp,x2,temp);
+		if axes_text then settextjustify(centertext,toptext);
+		i:=x1+1;
+		while i <= x2 do begin
+			line(i-1,temp-3,i-1,temp+3);
+			if axes_text then outtextxy(i-1,temp+1,stry(SXtoX(i),2,2));
+			inc(i,SXstep);
+		end;
+	end;
+	setviewport(0,0,swidth,shight,true);
+end;
+
+procedure draw.plot;
+{ draw the calculated graph }
+var i:integer;
+	point:integer;
+	r:integer;
+	placeOf0:integer;
+	lc:byte;
+  f:pgraph;
+  ff:boolean;
+begin
+  if what=0 then f:=form else begin
+		f:=comp[what];
+    ff := tofill;
+    tofill := false;
+  end;
+	if ToFill and (not fastdraw) then begin
+		if not fillmode then placeOf0 := YtoSY(0) else placeOf0 := y2;
+		if erasef then setcolor(bkColor) else setcolor (fillcolor);
+    i := 1;
+    while i < x2-x1-1 do begin
+      if Fillcolorize then
+      	if f^.points[i] > placeof0 then setcolor(FillDownColor)
+        else setcolor(FillUpColor);
+      if erasef then setcolor(bkColor);
+    	line(i+x1,YtoSY(f^.points[i]),i+x1,placeOf0);
+    	inc(i,f^.resolution);
+		end;
+	end else begin
+		if linewidth=1 then setlinestyle(0,0,1) else
+		if linewidth>=2 then setlinestyle(0,0,3);
+    if erasef then lc := bkcolor else lc := f^.linecolor;
+		setcolor(lc);
+    i := 1;
+    r := f^.resolution;
+    if f^.resolution = 0 then r := 1;
+    while i < x2-x1-1 do begin
+      point := YtoSY(f^.points[i]);
+      if (point < y2) and (point > y1) then begin
+				if fastdraw then putpixel(i+x1,point,lc)
+				else begin
+					line(i+x1,point,i+x1+1,YtoSY(f^.points[i-1]));
+					if linewidth=3 then line(i+x1,point-1,i+x1+1,point-1);
+	     	end;
+      end;
+    	inc(i,r);
+		end;
+		setlinestyle(0,0,1);
+	end;
+  if what > 0 then functionfill := ff;
+end;
+
+procedure draw.plothigh;
+{ draw the graph with high detiles }
+var i,i1,i2:integer;
+	placeOf0:integer;
+	lc:byte;
+  calcul,lastcalc : integer;
+  mstep : extended;
+	temp2,temp3,temp4:extended;
+begin
+  box.display;
+	draw_axes;
+
+	setlinestyle(0,0,1);
+	temp3:=minx;
+  i := 0;
+  i1 := x1;
+	ystep:=(maxy-miny)/(y2-y1);
+	temp4:=form^.calc(temp3);
+  calcul:=YtoSY(temp4)-y1;
+  lastcalc := calcul;
+  mstep:= (maxx-minx)/((x2-x1)*highdetilesratio);
+  while i1 < x2 do begin
+		temp4:=form^.calc(temp3);
+		if ioresult <> 0 then begin
+			errfunction := 'CALCULATE GRAPH at point: '+stry(temp3,0,2);
+			fatalerror(erroverflow);
+		end;
+    calcul:=YtoSY(temp4)-y1;
+		temp3:=temp3+mstep;
+    { draws }
+    if erasef then lc := bkcolor else lc := form^.linecolor;
+		setcolor(4);
+		line(i1,calcul+y1,i1,lastcalc+y1);
+		setlinestyle(0,0,1);
+  	inc(i);
+    if i = HighDetilesRatio then begin
+    	inc(i1);
+      i := 0;
+	    temp3:=SXtoX(i1);
+    end;
+    lastcalc := calcul;
+	end;
+end;
+
+destructor draw.bye;
+{ BYE BYE DRAW }
+var
+	i:byte;
+begin
+	box.bye;
+  while freecomp(0) do;
+end;
+
+{**********************************************}
+procedure espace(var st:string);
+{erase the redundet space }
+var
+	isfunc:boolean;
+	i:integer;
+	st1:string;
+begin
+	isfunc := false;
+	st1 := '';
+	for i := 1 to length(st) do begin
+		if st[i] in ['F','f'] then begin
+			isfunc := true;
+		end;
+		if not(st[i] in notgoodchar) then st1 := st1+st[i]
+		else if isfunc then begin
+			isfunc := false;
+			st1 := st1+st[i];
+		end;
+	end;
+	st := st1;
+end;
+
+
+end.

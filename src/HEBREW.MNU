@@ -1,0 +1,206 @@
+;            Menu definition file
+;           ----------------------
+; FULLY CONFIGURABLE MENU !
+; You can edit it to castumize your GRAPHIM program.
+; You can put every command in eny place you like.
+; You can have as meny command as you want in 1 menu,
+; or you can disribute them on up to 5 submenues.
+; BE CAREFULL - the number of menu command is (allmost) unlimited
+; but if there are to meny menu commands they will past the screen boundries
+;
+; This file has the same format of any windows INI files
+; including GRAPHIM.INI file.
+; with few exceptions :
+; each section is called [MENU0X]
+;   X is number form 1 to 5
+; the section is representing a submenu number X
+; after the section name you write the folowing line:
+;   MenuItems = x
+;     X is the number of menu commands
+; now you write the folowing lines X times
+;   Item0n.Title=<command title>
+;   Item0n.Description=<command description>
+;   Item0n.Ctl=<command code>
+;   Item0n.Help=<command help code>
+;               n is the time you write these lines
+; in normal INI files the order of the items in the section is not importenet
+; but here it is VERY IMPORTENT !
+;       Menu command  codes
+;    -------------------------
+;       doMenu1        = 1
+;       doMenu2        = 2
+;       doMenu3        = 3
+;       doMenu4        = 4
+;       doMenu5        = 5
+;       doExit         = 6
+;       doReturn       = 7
+;       doInput        = 8
+;       doGraph        = 9
+;       doMinimumX     =10
+;       doMaximumX     =11
+;       doMinimumY     =12
+;       doMaximumY     =13
+;       doRanges       =14
+;       doAutoFit      =15
+;       doLineWidth    =16
+;       doScRange      =17
+;       doHelp         =18
+;       doFunctionFill =19
+;       doRangesReset  =20
+;       doProgramReset =21
+;       doInvestigate  =22
+;       doMain         =24
+;
+; PLEASE Do not change this file.
+; Make a copy of the file and work on it.
+; You can then select the menu you want by editing GRAPHIM.INI
+[MENU01]
+MenuItems=6
+
+Title=2.5 ‰”˜‚ ‰…†˜€
+
+Item01.Title=€‡‘… ‘‹„
+Item01.Description=.“˜‚„ ™…‡‰ „‰”Œ™ €‡‘…„ š€ ‘‹„
+Item01.Ctl=8
+item01.help=8
+
+Item02.Title=‰‰ˆ—€˜ˆ‰€ “˜‚
+Item02.Description=‰”˜‚ ˜…—‡Œ… ˜‰‰‘Œ „™ƒ‡ Š˜ƒ
+Item02.Ctl=24
+item02.help=30
+
+Item03.Title=“˜‚„ š€ ˜‰‰–
+Item03.Description=.š‘‹„™ €‡‘…„ Œ™ “˜‚„ š€ ˜‰‰–
+Item03.Ctl=9
+item03.help=9
+
+Item04.Title=< š…‰…˜™”€
+Item04.Description=.š…‰…˜™”€ ˜”‘ ‘‹„
+Item04.Ctl=2
+
+Item05.Title=„˜†’
+Item05.Description=!!! ‰Œ ˜…†’‰ …„™‰™
+Item05.Ctl=18
+item05.help=1
+
+Item06.Title=„€‰–‰
+Item06.Description=! „† š€ ˜‡š Œ€
+Item06.Ctl=6
+item06.help=6
+
+[MENU02]
+MenuItems=6
+
+Title=‰‡……ˆ
+
+Item01.Title=‰˜‰–„ Œ‹
+Item01.Description=.(Y …‰‘—\‰‰ ,X …‰‘—\‰‰) ‰˜‰–„ Œ‹ Œ™ ‡……ˆ„ š€ ˜ƒ‚„
+Item01.Ctl=14
+item01.help=12
+
+Item02.Title=X …‰‰
+Item02.Description=.X ˜‰– Œ™ …š‡š„ Š˜’„
+Item02.Ctl=10
+item02.help=10
+
+Item03.Title=X …‰‘—
+Item03.Description=.X ˜‰– Œ™ …‰Œ’„ Š˜’„
+Item03.Ctl=11
+item03.help=10
+
+Item04.Title=Y …‰‰
+Item04.Description=.Y ˜‰– Œ™ …š‡š„ Š˜’„
+Item04.Ctl=12
+item04.help=11
+
+Item05.Title=Y …‰‘—
+Item05.Description=.Y ˜‰– Œ™ …š‡š„ Š˜’„
+Item05.Ctl=13
+item05.help=11
+
+Item06.Title=„˜†‡
+Item06.Description=.‰™€˜„ ˆ‰˜”šŒ „˜†‡
+Item06.Ctl=2
+item06.help=7
+
+[MENU03]
+MenuItems=4
+
+Title=š…‰…˜™”€
+
+Item01.Title=< š‰‹…š š…‰…˜™”€
+Item01.Description=.‰ˆ…ˆ…€ ‡……ˆ …‚‹ š…‰…˜™”€ '‘ „™
+Item01.Ctl=3
+item01.help=0
+
+Item02.Title=< „‚…–š š…‰…˜™”€
+Item02.Description=.„‚…–šŒ š…˜…™—„ š…‰…˜™”€ „™
+Item02.Ctl=4
+item02.help=0
+
+Item03.Title=< ‰‡……ˆ
+Item03.Description=Y… X ‰˜‰–„ Œ™ …‰‘—… …‰‰
+Item03.Ctl=2
+item03.help=12
+
+Item04.Title=„˜†‡
+Item04.Description=.‰™€˜„ ˆ‰˜”šŒ „˜†‡
+Item04.Ctl=7
+item04.help=7
+
+[MENU04]
+MenuItems=5
+
+Title=š‰‹…š š…‰…˜™”€
+
+Item01.Title=‰ˆ…ˆ…€ ‡……ˆ
+Item01.Description=.‰ˆ…ˆ…€ ”…€ Y ˜‰– ‡……ˆ š€ ’…—Œ
+Item01.Ctl=15
+item01.help=14
+
+Item02.Title=„‰–—…” š’‰–
+Item02.Description=.(„ƒ‰˜‰ ,„‰Œ’) „‰–—…”„ – ‰”Œ “˜‚„ š’‰–
+Item02.Ctl=22
+Item02.help=22
+
+Item03.Title=‰‡……ˆ ‘”€
+Item03.Description=“˜‚„ „€‰–‰„ ˜‡€Œ ‰‡……ˆ„ ‘…”‰€
+Item03.Ctl=20
+Item03.help=21
+
+Item04.Title=š‰‹…š ‘”€
+Item04.Description=.Œƒ‡ š˜‰˜Œ š…‰…˜™”€„ Œ‹ š€ ‘”€
+Item04.Ctl=21
+item04.help=0
+
+Item05.Title=„˜†‡
+Item05.Description=.‰™€˜„ ˆ‰˜”šŒ „˜†‡
+Item05.Ctl=7
+item05.help=7
+
+[MENU05]
+MenuItems=4
+
+Title=„‚…–š š…‰…˜™”€
+
+Item01.Title=“˜‚„ ‰…Œ‰
+Item01.Description=X-„ ˜‰–… “˜‚„ Œ™ ‡ˆ™„ ‰…Œ‰
+Item01.Ctl=19
+Item01.help=17
+
+Item02.Title=“˜‚„ ‰…’
+Item02.Description=.3 …€ 2,1 š…‰„Œ Œ…‹‰ .“˜‚„ …— Œ™ ‰…’„
+Item02.Ctl=16
+item02.help=15
+
+Item03.Title=Š‘„ ‡……ˆ
+Item03.Description=.Š‘„ Œ’ ˜‰…–‰ “˜‚„™ …—„ š€ ‘‹„
+Item03.Ctl=17
+item03.help=16
+
+Item04.Title=„˜†‡
+Item04.Description=.‰™€˜„ ˆ‰˜”šŒ „˜†‡
+Item04.Ctl=2
+item04.help=7
+
+EndMenu = ok

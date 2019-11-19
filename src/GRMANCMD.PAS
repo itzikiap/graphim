@@ -1,0 +1,567 @@
+unit grmancmd;
+{ all the commands for the main graph windows }
+interface
+uses mousebx,general,boxes,draw_gr,udr_gr,udr_dlg,app,bxlist,set_gr,drivers,grsavim,bmenu;
+var
+	main_app:application;
+	last_func:string;
+{  Main_Graph:userdraw;}
+  coordinates:msgbox;
+  snap:boolean;
+  crd_sum:(coords,formul,sumit,ver,Xs,Ys);
+  vers : string[5];
+  jump : byte;
+
+  MMain:menubar;
+  Msub:Pmenubar;
+{  Mfile:Pmenubar;
+  Mgraph:Pmenubar;
+  Minspect:Pmenubar;}
+  Mstatus:menubar;
+
+  kbtimer:timer;
+  timeron:boolean;
+  kbtimeout:byte;
+
+function Phandleevent(ID:word):word; far;
+{function Khandleevent(ID:word):word; far;}
+function Pcompare(ID:word):word; far;
+function Pgraph(ID:word):word; far;
+function Pcoords(ID:word):word; far;
+function PFastzoompan(ID:word):word; far;
+function Pfastfunc(ID:word):word; far;
+{---------------------}
+function CMain(ID:word):word; far;
+function Csubmenu(ID:word):word; far;
+function CStatusLine(ID:word):word; far;
+function CKey(ID:word):word; far;
+{---------------------}
+function GrpRedraw(ID:word):word; far;
+function GrpTimer(ID:word):word; far;
+function GrpCalib(ID:word):word; far;
+
+implementation
+{*}function Cmain;
+  var i:byte;
+begin
+  if mouse.buttompressed[1] then i := 1 else i := 2;
+	Cmain := MMain.cycle(i);
+end;
+
+{*}function Cstatusline;
+var i:byte;
+begin
+  with mouse do begin
+  end;
+  if mouse.buttompressed[1] then i := 1 else i := 2;
+  CStatusline := MStatus.cycle(i);
+end;
+
+{*}function Csubmenu;
+var b:border;
+	ct : word;
+  i:byte;
+  st:string;
+
+function ison(value:boolean):string;
+{ returns * if on }
+begin
+	if value then ison := '*' else ison := ' ';
+end;
+begin
+  ib(b,0,0,swidth,shight);
+  fastmsgbox(dover  ,on,on,on,on ,boxes.small,15,7,7,2,6,left,off);
+  fastmsgbox(dpress ,on,on,on,on ,boxes.small,14,7,8,2,6,left,off);
+  fastmsgbox(dnormal,on,on,on,off,boxes.small,15,7,7,2,6,left,off);
+  case ID of
+		mnu_Filemenu    : Msub:=initmenu(mouse.x,mouse.y,0,1,mnu_def_file,'file',b);
+		mnu_Helpmenu    : Msub:=initmenu(mouse.x,mouse.y,0,1,mnu_def_help,'help',b);
+		mnu_inspectmenu : Msub:=initmenu(mouse.x,mouse.y,0,1,mnu_def_inspect,'inspect',b);
+    mnu_compSMenu   : begin
+    		mnu_def_compare[4].name := ison(the_graph.comp_link)+'COMPARE LINK ';
+        Msub:=initmenu(mouse.x,mouse.y,0,1,mnu_def_compare,'Compare',b);
+    end;
+    mnu_compEmenu,mnu_compDmenu,mnu_copycomp,mnu_swichcomp : begin
+        for i := 1 to MaxCompare do begin
+					if i <= the_graph.compnum then the_graph.comp[i]^.gets(st) else st := 'UNAVAILABLE';
+        	mnu_def_compare_num[i].name := ' '+stry(i,0,0)+': '+st
+        end;
+        Msub:=initmenu(mouse.x,mouse.y,0,1,mnu_def_compare_num,'CompareNum',b);
+    end;
+			 { the idia is to give the user the ability to choose wich }
+        { comp formula to delete. Use it by returning the                    }
+				{	'cmp_edit' or 'cmp_del' with the comp number in the 'main_app.massages'}
+        { string }
+
+    mnu_InvSMenu    : begin
+        mnu_def_Investigate[1].name := ison(invshowminmax)+'MIN MAX';
+        mnu_def_Investigate[2].name := ison(invshowcrossing)+'CROSSING';
+        mnu_def_Investigate[3].name := ison(invgraphColorize)+'COLORIZE';
+				Msub:=initmenu(mouse.x,mouse.y,0,1,mnu_def_Investigate,'Investigate',b);
+    end;
+		mnu_Formulamenu : begin
+        the_graph.form^.gets(mnu_def_formula[1].name);
+        espace(mnu_def_formula[1].name);
+				Msub:=initmenu(mouse.x,mouse.y,0,1,mnu_def_formula,'Formula',b);
+    END;
+		mnu_graphmenu   : begin
+        with {main_}the_graph do begin
+        	mnu_def_graph[5].name := ison(not no_axes)+'SHOW AXES';
+        	mnu_def_graph[6].name := ison(tocolorize)+'COLORIZE';
+        	mnu_def_graph[7].name := ison(axes_text)+'AXES LABLES';
+        	mnu_def_graph[8].name := ison(linewidth = 3)+'THICK LINE';
+         	mnu_def_graph[9].name := ison(tofill)+'FUNCTION FILL';
+        	mnu_def_graph[10].name := ison(fillcolorize)+'2 COLOR FILL';
+         	mnu_def_graph[11].name := ison(fillmode)+'FROM BUTTOM';
+        end;
+				Msub:=initmenu(mouse.x,mouse.y,0,1,mnu_def_graph,'graph',b);
+    end;
+  end;
+  msub^.onclick := false;
+  msub^.noctl := 456;
+  mouse.erase;
+  Msub^.start;
+  mouse.display;
+  msub^.exclusive := false;
+  ct := 0;
+	repeat
+  	mouse.update;
+    if mouse.buttompressed[1] then ct := msub^.cycle(1)
+    else ct := msub^.cycle(2);
+  until (ct = msub^.noctl) or (ct <> 0);
+  Csubmenu := ct;{Msub^.exerunit;}
+  if ID in [mnu_compEmenu,mnu_compDmenu,mnu_swichcomp,mnu_copycomp] then begin
+		main_app.massages := stry(ID,0,0);
+  end;
+  mouse.erase;
+  Msub^.bye;
+  dispose(Msub);
+  mouse.display;
+end;
+
+{*}function Ckey;
+begin
+	cKey := grp_timeron;
+  with {main_}the_graph do
+  if kbp.what = evkeydown then
+	  case kbp.keycode of
+			kbdel:if jump = LargeZoomStep then jump := SmallZoomStep else jump:=LargeZoomStep;
+			kbup				:absscroll(0		, jump);
+			kbdown			:absscroll(0		,-jump);
+			kbleft			:absscroll(-jump,0);
+			kbright			:absscroll( jump,0);
+			kbpgup			:abszoom( jump, jump);
+			kbpgdn			:abszoom(-jump,-jump);
+			kbctrlleft	:abszoom(-jump,0);
+			kbctrlright	:abszoom( jump,0);
+      kbesc       :cKey := prexit;
+      kbenter     :cKey := mnu_restore;
+			kbF1        :cKey := mnu_Help1;
+			kbaltF1     :cKey := mnu_Help2;
+      else case kbp.charcode of
+          'S','s':cKey := mnu_save;
+					'A','a':cKey := mnu_autofit;
+					'F','f':cKey := mnu_FunctionFill;
+					'R','r':cKey := mnu_ranges;
+					'M','m':cKey := mnu_MenuByKb; { not implemented yet }
+          'I','i':cKey := mnu_investigate;
+          ' '    :cKey := mnu_fastfunc;
+          'Z','z':cKey := mnu_ZoomBox;
+					'X','x':individual := not individual;
+          'C','c':cKey := mnu_CompAdd;
+          '='    :cKey := mnu_CompareLink;
+         	'L','l':cKey := mnu_HiRes;
+          '`'    :cKey := mnu_saveimg;
+			end;
+
+    end;
+end;
+
+{----}
+{*}function Pcompare;
+var
+	i:byte;
+  st,st1:string;
+  l:byte;
+begin
+	st := main_app.massages;
+  if st <> '' then begin
+    l  := ID - cmp_one + 1;
+	 	ID := vali(st);
+  end;
+  case ID of
+   	mnu_compEmenu: if l<=the_graph.compnum then begin
+    	the_graph.comp[l]^.gets(st);
+      st := udr_gr.getinput(st);
+      the_graph.comp[l]^.sets(st);
+    end;
+    mnu_copycomp : if l<=the_graph.compnum then begin
+    	the_graph.form^.gets(st1);
+      the_graph.comp[l]^.sets(st1);
+    end;
+   	mnu_swichcomp: if l<=the_graph.compnum then begin
+    	the_graph.form^.gets(st1);
+    	the_graph.comp[l]^.gets(st);
+      the_graph.form^.sets(st);
+      the_graph.comp[l]^.sets(st1);
+    end;
+    mnu_compadd  : if the_graph.compnum <= maxcompare then begin
+      st := udr_gr.getinput(st);
+			the_graph.setcomp(st);
+    end;
+   	mnu_compDmenu: if l<=the_graph.compnum then the_graph.freecomp(l);
+    mnu_comparelink: with the_graph do complink := not complink;
+  end;
+  main_app.massages := '';
+  Pcompare := grp_redraw;
+end;
+
+{*}function Phandleevent;
+var
+	t:boolean;
+begin
+  mouse.erase;
+  Phandleevent := grp_redraw;
+  t := false;
+  with {main_}the_graph do begin
+		case ID of
+			mnu_AutoFit       :setautofit(not AutoFit);
+			mnu_fill2color    :fillcolorize := not fillcolorize;
+			mnu_FunctionFill  :ToFill := not toFill;
+      mnu_fillbuttom    :FillMode := not fillmode;
+      mnu_graphwidth    :if linewidth = 3 then linewidth := 1 else linewidth := 3;
+			mnu_Axes          :no_axes := not no_axes;
+			mnu_AxesText      :Axes_Text := not Axes_Text;
+      mnu_colorize      :tocolorize := not tocolorize;
+			mnu_Reset         :begin
+      	                 	individual := true;
+												 	assign(oldminx,oldmaxx,oldminy,oldmaxy);
+    									 	 end;
+			mnu_ZoomBox       :begin
+													 zoombox;
+                           mouse.mwindow(0,0,swidth,shight);
+                         end;
+			mnu_Ranges        :begin
+												   GetRanges(minx,maxx,miny,maxy);
+        	               	 fastdraw := false;
+                           getready;
+{          	               assign(minx,maxx,miny,maxy);}
+    									   end;
+      mnu_Investigate   :begin
+				                   Investigate;
+      									   Phandleevent := 0;
+                         end;
+      mnu_hires         :begin
+													 plothigh;
+                           phandleevent := 0;
+      									 end;
+			mnu_Calibarate    :begin
+						  					   fastdraw := false;
+												   keytime.reset;
+												   draw_axes;
+												   zoom(jump,jump);
+												   zoom(-jump,-jump);
+												   display;
+              	           draw_axes;
+												   timeout:= keytime.get*2;
+												   keytime.reset;
+											   end;
+  		mnu_Save          : begin
+														save;
+                            main_app.massages := 'FASTFUNC';
+                          end;
+    	mnu_Restore       : begin
+														restore;
+                            main_app.massages := 'FASTFUNC';
+                          end;
+    	mnu_saveimg       : savebitmap;
+      mnu_Help2         : dothehelp(19);
+      mnu_Help1         : dothehelp(30);
+      mnu_Help3         : dothehelp(1);
+      mnu_invminmax     : invshowminmax := not invshowminmax;
+      mnu_invcross      : invshowcrossing := not invshowcrossing;
+      mnu_invcolor      : invgraphcolorize := not invgraphcolorize;
+		end;
+	end;
+	mouse.display;
+end;
+
+{*}function Pcoords;
+var st:string;
+begin
+  pcoords := 0;
+	with {main_}the_graph do begin
+	  case crd_sum of
+			coords:	if Snap then
+								st := '('+stry(SXtoX(mouse.x),2,2)+' , '+stry(form^.calc(SXtoX(mouse.x)),2,2)+')'
+  			     	else
+				     		st := '('+stry(SXtoX(mouse.x),2,2)+' , '+stry(SYtoY(mouse.y),2,2)+')';
+      formul: begin
+							  form^.gets(st);
+                espace(st);
+              end;
+      sumit:	st := 'AREA: '+stry(form^.sum,3,3);
+      ver:    st := 'GRAPHIM '+vers;
+      Xs:     st := 'X: '+stry(minx,0,2)+' / '+stry(maxx,0,2);
+      Ys:     st := 'Y: '+stry(miny,0,2)+' / '+stry(maxy,0,2);
+    end;
+    if st <> coordinates.msg then begin
+      with mouse do if coordinates.isin(x,y) then erase;
+			coordinates.chngmsg(st);
+      with mouse do if coordinates.isin(x,y) then display;
+    end;
+  end;
+end;
+
+{*}function PGraph;
+var m:integer;
+begin
+  Pgraph := 0;
+  with mouse do begin
+    with coordinates do begin
+	    if isin(x,y) then begin
+      	if buttompressed[1] then begin
+          mouse.erase;
+        	set3D(on,on);
+          setmcolor(15,15,12);
+          mouse.display;
+        end else begin
+          mouse.erase;
+          set3D(on,off);
+          setmcolor(15,15,9);
+					if released[1] then begin
+            pgraph := grp_coords;
+        		crd_sum:= succ(crd_sum);
+            if crd_sum > ys then crd_sum := coords;
+          end;
+          mouse.display;
+        end;
+      end else begin
+        mouse.erase;
+        set3D(on,on);
+        setmcolor(15,15,1);
+        mouse.display;
+      end;
+   	end;
+
+		if pressed[2] then begin
+      snap := not snap;
+      mouse.erase;
+      with {main_}the_graph do
+			  if snap then mouse.mwindow(x1,y1,x2,y2)
+				else begin
+          pgraph := grp_Redraw;
+					mouse.mwindow(0,0,swidth,shight);
+        end;
+	    mouse.display;
+    end;
+  	if {main_}the_graph.isin(x,y) then begin
+      if crd_sum = coords then pgraph := grp_coords;
+			setmousetype(cross);
+			if Snap then begin
+        with {main_}the_graph do begin
+        	m := YtoSY(form^.points[mouse.x-x1])-mouse.y;
+        	if  mouse.y+m <= y1 then m:=m+1 else if mouse.y+m>=y2 then m:=m-1;
+					mouse.move(0,m);
+        end;
+      end;
+      if pressed[1] then Pgraph := mnu_Zoombox;
+      if pressed[3] then begin
+      	if (kbdstate.kbst and kbaltshift) = 0 then Pgraph := mnu_fastpan else Pgraph := mnu_fastzoom;
+        main_app.massages := 'InGraph';
+      end;
+    end else setmousetype(arrow);
+  end;
+end;
+
+{*}function PFastZoomPan;
+{ Zoom or Pan - according to the ID }
+var
+	mx,my,mi:integer;
+  factor:real;
+  fl,compi,col,ax,axtx:boolean;
+  kp,mid:byte;
+begin
+  if main_app.massages = 'InGraph' then kp := 3 else kp := 1;
+  factor := {main_}the_graph.width/{main_}the_graph.hight;
+  with the_graph do begin
+    ax      := no_axes;
+    no_axes := off;
+    axtx      := axes_text;
+    axes_text := on;
+		fl     := tofill;
+		tofill := off;
+    compi      := not tugglecomp;
+    if complink then tugglecomp;
+    col        := tocolorize;
+    tocolorize := off;
+    if FastDrawMouseZoom then fastdraw := true;
+  end;
+  if mouse.buttompressed[kp] then begin
+		mouse.erase;
+    {main_the_graph.fastdraw:=false;}
+    {main_}the_graph.resolution := 1;
+    mx := mouse.x;
+    my := mouse.y;
+  end;
+  if MainPanMouseInvert then mi := -1 else mi := 1;
+  mid := id;
+  with mouse do
+		repeat
+      update;
+      while not changed	do begin update; end;
+      if id = mnu_fastzoom then begin
+				if abs(ymove)*2 > abs(xmove) then {main_}the_graph.abszoom(-ymove,round(-ymove*factor))
+        else {main_}the_graph.abszoom(xmove,0);
+      end else {main_}the_graph.absscroll(xmove*mi,-ymove*mi);
+      {main_}the_graph.display;
+      kbdstate.kbst   := getshiftstate;
+      if (kbdstate.kbst and kbaltshift) <> 0 then begin
+				if MID = mnu_fastzoom then id := mnu_fastpan else id := mnu_fastzoom;
+      end else id := MID;
+    until released[kp];
+  {main_}the_graph.fastdraw := false;
+  {main_}the_graph.resolution := 1;
+  mouse.display;
+  mouse.move(mx,my);
+  with the_graph do begin
+		tofill := fl;
+    if compi then tugglecomp;
+    tocolorize := col;
+    no_axes := ax;
+    axes_text := axtx;
+    if FastDrawMouseZoom then fastdraw := false;
+  end;
+	PfastZoomPan := Grp_Redraw;
+	if kp = 3 then main_app.massages := '';
+end;
+
+{*}Function PFastFunc;
+var
+	st,st1:string;
+begin
+  PFastFunc := grp_redraw;
+  main_app.massages := 'FASTFUNC';
+  case id of
+    mnu_FastFunc: begin
+                    the_graph.form^.gets(last_func);
+                    st := last_func;
+										st := getinput(st);
+								  	the_graph.setfunc(st);
+								  	the_graph.getready;
+    							end;
+    mnu_invfunc : begin
+                    the_graph.form^.gets(last_func);
+                    st := last_func;
+                    if copy(st,1,5) = '1 / (' then st := copy(st,6,ord(st[0])) else st := '1/('+st;
+								  	the_graph.setfunc(st);
+								  	the_graph.getready;
+    							end;
+    mnu_lastfunc: begin
+                    the_graph.form^.gets(st);
+								  	the_graph.setfunc(last_func);
+								  	the_graph.getready;
+                    last_func := st;
+                  end;
+  end;
+end;
+
+{*}Function GrpRedraw;
+begin
+  GrpRedraw := 0;
+  if copy(main_app.massages,1,7) = 'KBTIMER' then begin
+	  if crd_sum in [xs,ys] then grpredraw := grp_coords;
+		grpredraw := grp_TimerOn;
+    exit;
+ 	end;
+  mouse.erase;
+  with the_graph do begin
+  	Fastdraw := false;
+		display;
+  end;
+  if tocolorize then {main_}the_graph.colorize;
+  mmain.display(true);
+	coordinates.display;
+  Mstatus.display(true);
+  mouse.display;
+  if crd_sum in [xs,ys,sumit] then grpredraw := grp_coords;
+  if (main_app.massages = 'FASTFUNC') and (crd_sum = formul) then begin
+    main_app.massages := '';
+		grpredraw := grp_coords;
+  end;
+end;
+
+{*}function grptimer;
+begin
+	grptimer := 0;
+  if id = grp_timeron then begin
+   	begin
+	    kbtimer.reset;
+ 		  grptimer := grp_timeroff;
+    	if not timeron then with the_graph do begin
+        mouse.erase;
+	      with main_app do begin
+		      massages := 'KBTIMER ';
+    	    if no_axes then massages := massages+'1' else massages := massages+'0';
+      	  if axes_text then massages := massages+'1' else massages := massages+'0';
+        	if tofill then massages := massages+'1' else massages := massages+'0';
+  	      if comp_link then massages := massages+'1' else massages := massages+'0';
+	        if tocolorize then massages := massages+'1' else massages := massages+'0';
+    	  end;
+    		no_axes := off;
+	    	axes_text := on;
+				tofill := off;
+    		comp_link := off;
+    		tocolorize := off;
+    		if FastDrawMouseZoom then fastdraw := true;
+        resolution := 1;
+	      timeron := true;
+      end;
+      mouse.erase;
+			the_graph.display;
+   	  mouse.display;
+    end;
+  end else if id= grp_timeroff then begin
+    if timeron then begin
+      if kbtimer.get > kbtimeout then begin
+        mouse.display;
+	    	timeron := false;
+		    with the_graph do begin
+    	  	with main_app do begin
+	    	  	if massages[1] = 'K' then begin
+		  		  	no_axes    := (massages[9] = '1');
+  	  				axes_text := (massages[10] = '1');
+							tofill := (massages[11] = '1');
+	    				comp_link := (massages[12] = '1');;
+  	  				tocolorize := (massages[13] = '1');;
+    	      end;
+      	    massages := '';
+      		end;
+	       	fastdraw := false;
+          resolution := 1;
+  	      grptimer := grp_timercal;
+    		end;
+	    end;
+    end;
+  end;
+end;
+
+{*}function grpcalib;
+begin
+  mouse.erase;
+	kbtimer.reset;
+  with the_graph do begin
+    fastdraw := false;
+    resolution := 1;
+{		zoom(jump,jump);
+	zoom(-jump,-jump);}
+	  draw_axes;
+		display;
+  end;
+	kbtimeout:= kbtimer.get*2;
+	kbtimer.reset;
+	grpcalib := grp_redraw;
+end;
+
+{******************************************}
+end.

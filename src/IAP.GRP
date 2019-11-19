@@ -1,0 +1,395 @@
+[FIRST]
+; Arzony GRAPHIM programmed by Itzhak Arzony.
+; Saved on 19-10-2000
+;---------------------------
+Formula = ( SIN ( 15 * X ) + 1 / 5 * X ^ 2 )
+MinX = -10.00000
+MaxX = 10.00000
+MinY = -4.96868
+MaxY = 35.03132
+FunctionFill = TRUE
+2ColorFill = TRUE
+LineWidth = 1
+OK = OK
+;======================================================
+
+[SECOND]
+; Arzony GRAPHIM programmed by Itzhak Arzony.
+; Saved on 19-10-2000
+;---------------------------
+Formula = ( SIN ( 5 * X ) ) ^ 1 / 5 * X ^ 2
+MinX = -20.00000
+MaxX = 20.00000
+MinY = -78.10571
+MaxY = 78.10571
+FunctionFill = FALSE
+2ColorFill = TRUE
+LineWidth = 1
+OK = OK
+;======================================================
+
+[NICE-SINE]
+; Arzony GRAPHIM programmed by Itzhak Arzony.
+; Saved on 12-11-2000
+;---------------------------
+Formula = 7 * ( ( 12 * SIN X ) ^ 2 ) + ( 912 * SIN ( 1 / 25 * X ) )
+MinX = -669.83821
+MaxX = 328.50569
+MinY = -2219.52800
+MaxY = 3246.32444
+FunctionFill = TRUE
+2ColorFill = TRUE
+LineWidth = 1
+OK = OK
+;======================================================
+
+[NICE-SINE2]
+; Arzony GRAPHIM programmed by Itzhak Arzony.
+; Saved on 12-11-2000
+;---------------------------
+Formula = 7 * ( ( 12 * SIN X ) ^ 2 ) + ( 912 * SIN ( 1 / 25 * X ) )
+MinX = -352.36400
+MaxX = 61.36944
+MinY = -4.90752
+MaxY = 1892.02465
+FunctionFill = TRUE
+2ColorFill = TRUE
+LineWidth = 1
+OK = OK
+;======================================================
+
+[HILLS]
+; Arzony GRAPHIM programmed by Itzhak Arzony.
+; Saved on 10-12-2000
+;---------------------------
+Formula = SIN ( 13 * X ) * 17 * COS ( X / 7 )
+MinX = -30.89281
+MaxX = 30.89281
+MinY = -30.09607
+MaxY = 30.09607
+FunctionFill = FALSE
+2ColorFill = TRUE
+LineWidth = 1
+OK = OK
+;======================================================
+
+[WAVE]
+; Arzony GRAPHIM programmed by Itzhak Arzony.
+; Saved on 25-12-2000
+;---------------------------
+Formula = SIN X + 2 - X ^ 3
+MinX = -1.42461
+MaxX = 1.52992
+MinY = -0.54971
+MaxY = 3.90196
+FunctionFill = FALSE
+2ColorFill = TRUE
+LineWidth = 1
+OK = OK
+;======================================================
+
+[SIN X^2]
+; Arzony GRAPHIM programmed by Itzhak Arzony.
+; Saved on 1-1-2001
+;---------------------------
+Formula = 6 * SIN X ^ 2
+MinX = -7.84411
+MaxX = 7.72787
+MinY = -12.25419
+MaxY = 8.30344
+FunctionFill = FALSE
+2ColorFill = TRUE
+LineWidth = 1
+OK = OK
+;======================================================
+
+[SIN_PI]
+; Arzony GRAPHIM programmed by Itzhak Arzony.
+; Saved on 28-2-2001
+;---------------------------
+Formula = 3 * COS ( 3 * X + PI 1 / 2 )
+MinX = -20.00000
+MaxX = 20.00000
+MinY = -20.00000
+MaxY = 20.00000
+FunctionFill = FALSE
+2ColorFill = TRUE
+LineWidth = 1
+OK = OK
+;======================================================
+
+[ACCURICY-(PRESS_L)]
+; Arzony GRAPHIM programmed by Itzhak Arzony.
+; Saved on 2-3-2001
+;---------------------------
+Formula = ( SIN ( X ^ 2 ) / SIN ( COS ( X / 2 ) ) )
+MinX = -26.10048
+MaxX = 29.93488
+MinY = -9.29275
+MaxY = 11.72883
+FunctionFill = FALSE
+2ColorFill = TRUE
+LineWidth = 1
+OK = OK
+;======================================================
+
+[SINUS? (PRESS L)]
+; Arzony GRAPHIM programmed by Itzhak Arzony.
+; Saved on 6-5-2001
+;---------------------------
+Formula = 65345 * SIN X + ( 5 / ( TAN X ^ 2 ) ) + LN ( SIN X )
+MinX = 0.08939
+MaxX = 9.40325
+MinY = -76370.69033
+MaxY = 79642.58733
+FunctionFill = FALSE
+2ColorFill = TRUE
+LineWidth = 2
+OK = OK
+;======================================================
+
+[STAIRS]
+; Arzony GRAPHIM programmed by Itzhak Arzony.
+; Saved on 6-5-2001
+;---------------------------
+Formula = 45 * X + ( 5 / ( TAN X ^ 2 ) ) + LN ( SIN X )
+MinX = 0.71289
+MaxX = 9.73714
+MinY = 2.21981
+MaxY = 524.77508
+FunctionFill = TRUE
+2ColorFill = FALSE
+LineWidth = 1
+OK = OK
+;======================================================
+[RISING]
+; Arzony GRAPHIM programmed by Itzhak Arzony.
+; Saved on 30-3-2002
+;---------------------------
+Formula = 12 * ( SIN X / 5 ) + 4 * SIN ( X ^ 3 ) + X / 2
+MinX = -17.23497
+MaxX = 17.37728
+MinY = -27.98102
+MaxY = 27.96339
+FunctionFill = FALSE
+2ColorFill = TRUE
+LineWidth = 1
+OK = OK
+;======================================================
+
+[WAVES]
+; Arzony GRAPHIM programmed by Itzhak Arzony.
+; Saved on 8-11-2002
+;---------------------------
+Formula = X / 2 * ( COS ( 2 * X ) ) + 17 * SIN ( SQR ( X + 2 ) )
+MinX = -46.44197
+MaxX = 134.84840
+MinY = -47.66576
+MaxY = 74.04549
+FunctionFill = TRUE
+2ColorFill = TRUE
+LineWidth = 1
+OK = OK
+;======================================================
+
+[DOES IT TOUCH]
+; Arzony GRAPHIM programmed by Itzhak Arzony.
+; Saved on 8-11-2002
+;---------------------------
+Formula = SQR ( ABS ( X ^ 2 * SIN ( 2 * X ) ) )
+MinX = -88.40229
+MaxX = 12.04205
+MinY = -3.20369
+MaxY = 71.58812
+FunctionFill = FALSE
+2ColorFill = TRUE
+LineWidth = 1
+OK = OK
+;======================================================
+
+[MESHIKIM]
+; Arzony GRAPHIM V2.4 programmed by Itzhak Arzony.
+; Saved on 23-11-2002
+;---------------------------
+Formula = SIN X + 2 - X ^ 3
+MinX = -1.07408
+MaxX = 0.96390
+MinY = 1.22043
+MaxY = 2.60381
+FunctionFill = FALSE
+2ColorFill = TRUE
+Colorize = TRUE
+Axes = TRUE
+AxesLabels = FALSE
+LineWidth = 1
+CompareFormula = SINX+2+X^3
+CompareLink = TRUE
+OK = OK
+;======================================================
+
+[MIRRORED]
+; Arzony GRAPHIM V2.4 programmed by Itzhak Arzony.
+; Saved on 23-11-2002
+;---------------------------
+Formula = 1 / ( SIN X + 2 - X ^ 3 )
+MinX = -2.47261
+MaxX = 3.53678
+MinY = -2.92035
+MaxY = 3.09735
+FunctionFill = TRUE
+2ColorFill = FALSE
+Colorize = FALSE
+Axes = FALSE
+AxesLabels = FALSE
+LineWidth = 1
+OK = OK
+;======================================================
+
+[GRAPH01]
+; Arzony GRAPHIM V2.4 programmed by Itzhak Arzony.
+; Saved on 23-11-2002
+;---------------------------
+Formula = X / 2 * ( COS ( 2 * X ) ) + 17 * SIN ( SQR ( X + 2 ) )   
+MinX = -45.55803
+MaxX = 134.84840
+MinY = -46.33424
+MaxY = 74.04549
+FunctionFill = TRUE
+2ColorFill = TRUE
+Colorize = FALSE
+Axes = TRUE
+AxesLabels = TRUE
+LineWidth = 1
+OK = OK
+;======================================================
+
+[SIN OR TAN]
+; Arzony GRAPHIM V2.4 programmed by Itzhak Arzony.
+; Saved on 28-11-2002
+;---------------------------
+Formula = SIN X  
+MinX = -3.16119
+MaxX = 9.73396
+MinY = -5.66372
+MaxY = 7.07965
+FunctionFill = FALSE
+2ColorFill = TRUE
+Colorize = TRUE
+Axes = TRUE
+AxesLabels = FALSE
+LineWidth = 1
+CompareFormula = SIN X+TANX
+CompareLink = TRUE
+OK = OK
+;======================================================
+
+[GRAPH01]
+; Arzony GRAPHIM V2.4 programmed by Itzhak Arzony.
+; Saved on 21-2-2003
+;---------------------------
+Formula = X ^ 2    
+MinX = -20.00000
+MaxX = 20.00000
+MinY = -20.00000
+MaxY = 20.00000
+FunctionFill = FALSE
+2ColorFill = TRUE
+Colorize = FALSE
+Axes = TRUE
+AxesLabels = TRUE
+LineWidth = 1
+OK = OK
+;======================================================
+
+[GRAPH01]
+; Arzony GRAPHIM V2.4 programmed by Itzhak Arzony.
+; Saved on 3-4-2003
+;---------------------------
+Formula = X ^ 2  
+MinX = -1.34585
+MaxX = 5.41471
+MinY = 0.00000
+MaxY = 29.20463
+FunctionFill = FALSE
+2ColorFill = TRUE
+Colorize = FALSE
+Axes = TRUE
+AxesLabels = TRUE
+LineWidth = 1
+OK = OK
+;======================================================
+
+[INVESTIGATE]
+; Arzony GRAPHIM V2.5 programmed by Itzhak Arzony.
+; Saved on 17-4-2003
+;---------------------------
+Formula = 1 / ( ( SIN ( 5 * X ) ) ^ 1 / 5 * X ^ 2 )   
+MinX = -1.72326
+MaxX = 1.24737
+MinY = -147.34826
+MaxY = 144.27597
+FunctionFill = TRUE
+2ColorFill = FALSE
+Colorize = FALSE
+Axes = FALSE
+AxesLabels = TRUE
+LineWidth = 1
+OK = OK
+;======================================================
+
+[GRAPH01]
+; Arzony GRAPHIM V2.5 programmed by Itzhak Arzony.
+; Saved on 31-10-2003
+;---------------------------
+Formula = X ^ 2    
+MinX = -282.66041
+MaxX = 282.22222
+MinY = -53.23714
+MaxY = -50.73342
+FunctionFill = FALSE
+2ColorFill = TRUE
+Colorize = FALSE
+Axes = TRUE
+AxesLabels = TRUE
+LineWidth = 1
+OK = OK
+;======================================================
+
+[MICHAL]
+; Arzony GRAPHIM V2.5 programmed by Itzhak Arzony.
+; Saved on 15-11-2003
+;---------------------------
+Formula = 1 / ( 2 * X - 1 ) + 1 / ( 2 * X + 1 ) - 3 / 4   
+MinX = -2.40690
+MaxX = 2.90848
+MinY = -20.67438
+MaxY = 21.83249
+FunctionFill = TRUE
+2ColorFill = FALSE
+Colorize = TRUE
+Axes = TRUE
+AxesLabels = TRUE
+LineWidth = 1
+OK = OK
+;======================================================
+
+[GRAPH01]
+; Arzony GRAPHIM V2.5 programmed by Itzhak Arzony.
+; Saved on 26-12-2003
+;---------------------------
+Formula = X ^ 2 - 6 * X + 11  
+MinX = -5.59939
+MaxX = 11.61797
+MinY = -11.64038
+MaxY = 22.15030
+FunctionFill = FALSE
+2ColorFill = TRUE
+Colorize = FALSE
+Axes = TRUE
+AxesLabels = TRUE
+LineWidth = 1
+CompareFormula = X+1
+CompareLink = TRUE
+OK = OK
+;======================================================
+

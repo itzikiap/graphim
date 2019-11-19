@@ -1,0 +1,48 @@
+ATT.BGI      BGI driver
+BOLD.CHR     BGI english font
+CGA.BGI      BGI driver
+descript.ion The files descriptions
+DGRAPHIM.PIF Windows Support file
+EGAVGA.BGI   BGI driver
+ENGLISH.MNU  English menu definition
+EURO.CHR     BGI english font
+GOTH.CHR     BGI english font
+GRAPHIM.EXE  The GRAPHIM Program
+GRAPHIM.HLP  Online help
+GRAPHIM.ICO  Windows icon
+GRAPHIM.INI  GRAPHIM setting file
+GRAPHIM.PIF  Windows Support file
+GRSETUP.ICO  Windows icon
+HEB1.CHR     BGI hebrew font
+HEB2.CHR     BGI hebrew font
+HEB3.CHR     BGI hebrew font
+HEB4.CHR     BGI hebrew font
+HEB5.CHR     BGI hebrew font
+HEB6.CHR     BGI hebrew font
+HEB7.CHR     BGI hebrew font
+HEB8.CHR     BGI hebrew font
+HEBREW.MNU   Hebrew menu definition
+HERC.BGI     BGI driver
+IAP.GRP      Saved graphs
+IBM8514.BGI  BGI driver
+INSTALL.EXE  The Installation program
+INSTALL.ICO  Windows icon
+INSTALL.INI  Installation setting
+INSTALL.PIF  Windows Support file
+LCOM.CHR     BGI english font
+LITT.CHR     BGI english font
+MENU.ICO     Windows icon
+PC3270.BGI   BGI driver
+README.COM   Use this to read the GRAPHIM.TXT
+README.ICO   Windows icon
+README.PIF   Windows Support file
+README.TXT   Short hebrew documention
+SANS.CHR     BGI english font
+SCRI.CHR     BGI english font
+SETUP.COM    Use this to edit GRAPHIM.INI
+SETUP.PIF    Windows Support file
+SIMP.CHR     BGI english font
+TRIP.CHR     BGI english font
+TSCR.CHR     BGI english font
+VESA.BGI     BGI driver
+VESA16.BGI   BGI driver

@@ -1,0 +1,202 @@
+;            Menu definition file
+;           ----------------------
+; FULLY CONFIGURABLE MENU !
+; You can edit it to castumize your GRAPHIM program.
+; You can put every command in eny place you like.
+; You can have as meny command as you want in 1 menu,
+; or you can disribute them on up to 5 submenues.
+; BE CAREFULL - the number of menu command is (allmost) unlimited
+; but if there are to meny menu commands they will past the screen boundries
+;
+; This file has the same format of any windows INI files
+; including GRAPHIM.INI file.
+; with few exceptions :
+; each section is called [MENU0X]
+;   X is number form 1 to 5
+; the section is representing a submenu number X
+; after the section name you write the folowing line:
+;   MenuItems = x
+;     X is the number of menu commands
+; now you write the folowing lines X times
+;   Item0n.Title=<command title>
+;   Item0n.Description=<command description>
+;   Item0n.Ctl=<command code>
+;   Item0n.Help=<command help code>
+;               n is the time you write these lines
+; in normal INI files the order of the items in the section is not importenet
+; but here it is VERY IMPORTENT !
+;         Menu command codes
+;       doMenu1        = 1
+;       doMenu2        = 2
+;       doMenu3        = 3
+;       doMenu4        = 4
+;       doMenu5        = 5
+;       doExit         = 6
+;       doReturn       = 7
+;       doInput        = 8
+;       doGraph        = 9
+;       doMinimumX     =10
+;       doMaximumX     =11
+;       doMinimumY     =12
+;       doMaximumY     =13
+;       doRanges       =14
+;       doAutoFit      =15
+;       doLineWidth    =16
+;       doScRange      =17
+;       doHelp         =18
+;       doFunctionFill =19
+;       doRangesReset  =20
+;       doProgramReset =21
+;       doInvestigate  =22
+;       doMAin         =24
+[MENU01]
+MenuItems=6
+
+Title=ARZONY GRAPHIM V2.5
+
+Item01.Title=ENTER FORMULA
+Item01.Description=Enter the formula to calculate.
+Item01.Ctl=8
+item01.help=8
+
+Item02.Title=New Main Graph
+Item02.Description=The new way to explore grphs.
+Item02.Ctl=24
+item02.help=30
+
+Item03.Title=DRAW THE GRAPH
+Item03.Description=Draw the calculated graph.
+Item03.Ctl=9
+item03.help=9
+
+Item04.Title=OPTIONS >
+Item04.Description=Enter some options.
+Item04.Ctl=2
+
+Item05.Title=HELP
+Item05.Description=Give me help !!!
+Item05.Ctl=18
+Item05.help=1
+
+Item06.Title=QUIT
+Item06.Description=DON'T CHOOSE ME !
+Item06.Ctl=6
+item06.help=6
+
+[MENU02]
+MenuItems=6
+
+Title=RANGES
+
+Item01.Title=ALL AXES
+Item01.Description=Define the range of all axes - MinX,MinY,MaxX,MaxY.
+Item01.Ctl=14
+item01.help=12
+
+Item02.Title=MINIMUM X
+Item02.Description=The minimum value of the X axis.
+Item02.Ctl=10
+item02.help=10
+
+Item03.Title=MAXIMUM X
+Item03.Description=The maximum value of the X axis.
+Item03.Ctl=11
+item03.help=10
+
+Item04.Title=MINIMUM Y
+Item04.Description=The minimum value of the Y axis.
+Item04.Ctl=12
+item04.help=11
+
+Item05.Title=MAXIMUM Y
+Item05.Description=The maximum value of the Y axis.
+Item05.Ctl=13
+item05.help=11
+
+Item06.Title=RETURN
+Item06.Description=Return to main menu.
+Item06.Ctl=2
+item06.help=7
+
+[MENU03]
+MenuItems=4
+
+Title=OPTIONS
+
+Item01.Title=PROGRAM OPTIONS >
+Item01.Description=Change some options like AutoFit...
+Item01.Ctl=3
+item01.help=0
+
+Item02.Title=DISPLAY OPTIONS >
+Item02.Description=Change Options Related to the display.
+Item02.Ctl=4
+item02.help=0
+
+Item03.Title=GRAPH RANGE >
+Item03.Description=Minimum and maximum of X and Y.
+Item03.Ctl=1
+item03.help=12
+
+Item04.Title=RETURN
+Item04.Description=Return to main menu.
+Item04.Ctl=7
+item04.help=7
+
+[MENU04]
+MenuItems=5
+
+Title=PROGRAM OPTIONS
+
+Item01.Title=AUTO FIT
+Item01.Description=Auto determine the range of Y.
+Item01.Ctl=15
+item01.help=14
+
+Item02.Title=COLORIZE
+Item02.Description=Colorize graph according to its state.
+Item02.Ctl=22
+Item02.help=22
+
+Item03.Title=RANGES RESET
+Item03.Description=Reset the ranges after exiting the graph.
+Item03.Ctl=20
+Item03.help=21
+
+Item04.Title=PROGRAM RESET
+Item04.Description=Reset all parameters to their default.
+Item04.Ctl=21
+item04.help=0
+
+Item05.Title=RETURN
+Item05.Description=Return to main menu.
+Item05.Ctl=7
+item05.help=7
+
+[MENU05]
+MenuItems=4
+
+Title=DISPLAY OPTIONS
+
+Item01.Title=FUNCTION FILL
+Item01.Description=fill the area betwin the graph line and the X axis.
+Item01.Ctl=19
+Item01.help=17
+
+Item02.Title=GRAPH LINE WIDTH
+Item02.Description=The width of the graph line can be 1, 2 or 3.
+Item02.Ctl=16
+item02.help=15
+
+Item03.Title=SCREEN RANGE
+Item03.Description=Enter the range of the graph on screen.
+Item03.Ctl=17
+item03.help=16
+
+Item04.Title=RETURN
+Item04.Description=Return to main menu.
+Item04.Ctl=7
+item04.help=7
+
+
+EndMenu = ok

@@ -1,0 +1,746 @@
+°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
+°°ÛÛÛÛÛ°ÛÛÛÛ°°ÛÛÛÛÛ°ÛÛÛÛ°°Û°°°Û°Û°Û°°°Û°ÉÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ»°°°Û°°°Û°ÛÛÛ°°°°ÛÛ°
+°°Û°°°°°Û°°°Û°Û°°°Û°Û°°°Û°Û°°°Û°Û°ÛÛ°ÛÛ°º I.A.P Presents  º±±°Û°°°Û°°°Û°°°Û°°°
+°°Û°°°°°Û°°°Û°Û°°°Û°Û°°°Û°Û°°°Û°Û°Û°Û°Û°ÇÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¶±±°Û°°°Û°°°Û°°°ÛÛ°°
+°°Û°°ÛÛ°ÛÛÛÛ°°ÛÛÛÛÛ°ÛÛÛÛ°°ÛÛÛÛÛ°Û°Û°°°Û°º  ARZONY GRAPHIM º±±°Û°°°Û°ÛÛÛ°°°Û°Û°
+°°Û°°°Û°Û°°°Û°Û°°°Û°Û°°°°°Û°°°Û°Û°Û°°°Û°ÇÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¶±±°°Û°Û°°Û°°°°°Û°Û°
+°°ÛÛÛÛÛ°Û°°°Û°Û°°°Û°Û°°°°°Û°°°Û°Û°Û°°°Û°ºBy Itzhak Arzony.º±±°°°Û°°°ÛÛÛ°Û°°Û°°
+°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°ÈÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ¼±±°°°°°°°°°°°°°°°°°
+°°°°°±²ÛºÛ²±°°°°°°°°°°°°°°°°°°°°°°°°°°°°°±±±±±±±±±±±±±±±±±±±±°°°°°°±²ÛºÛ²±°°°°
+        ºIF YOU SEE GARBAGE ON THE SCREEN VIEW WITH THE README PROGRAMº
+        ÈÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍËÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ¼
+                                 °°±²ÛºÛ²±°°
+                                 °Content :°
+                                 °°±²ÛºÛ²±°°
+                     ÉÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÊÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ¸
+                     º 1.   What is GRAPHIM ?          ³
+                     º 2.   Before starting.           ³
+                     º 3.   How to use it ?            ³
+                     º 3.1  Menu Commands              ³
+                     º 3.2  Enter Formula              ³
+                     º 3.3  Draw The Graph             ³
+                     º 4.   The New Interface          ³
+                     º 4.1  How To Use                 ³
+                     º 5.   Misc.                      ³
+                     º 6.   Support.                   ³
+                     º 7.   History.                   ³
+                     ÓÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÒÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+        ÉÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ¼
+°°°°°±²ÛºÛ²±°°°°°°°
+°What is graphim ?°
+°°°°°±²ÛºÛ²±°°°°°°°
+        ÈÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ»
+ÉÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÊÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ¸
+ºARZONY GRAPHIM is a program that draws graphs                ³
+º  by a formula.                                              ³
+ºIt fetures the folowing:                                     ³
+º  - Easy to use interface: GRAPHIM is meant to be very easy  ³
+º      to use, even for peoples how dont get very well with   ³
+º      the computer. For each opration you have at least 3    ³
+º      ways to do it.                                         ³
+º  - Speed: GRAPHIM calculation is very fast. You can even    ³
+º      Zoom and Pan in Real Time                              ³
+º  - Dons't strict to a structure: Graphim is very flexible   ³
+º      with the intepretation of the formula                  ³
+º      In GRAPHIM, you can write something like this :        ³
+º        Y = {(X+16)*(2X-5)*7}/4X2                            ³
+º      GRAPHIM will accept this (try it !).                   ³
+º  - Write the formula in the program you write it on the     ³
+º      paper. No structure is required.                       ³
+º  - Supports infinit levels of brackets. Supports geometrical³
+º      functions.                                             ³
+º  - Can compare between two graphs.                          ³
+º  - Can Analize the graph for accending/deccending and       ³
+º      Minimum/Maximum points.                                ³
+º  - The new easy to use interface - you cant find it in any  ³
+º       other program!!!                                      ³
+º  - And Now (V2.3) - the ability to save the graph window in ³
+º      standart windows BITMAP format (.BMP files)!           ³
+º      It captures everything - including investigation,      ³
+º      colorize, compared and everything else inside the      ³
+º      graph window. (Living the formula out. sorry...)       ³
+ÓÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÒÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+     ÉÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ¼
+     º             ÉÍÍËÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ¸
+°°±²ÛºÛ²±°°°°°°°±²ÛºÛ ºPRESS ANYWHERE IN THE PROGRAM ON F1³
+°Before reading .°²Û² ºFOR HELP.                          ³
+°°°°°°°±²ÛºÛ²±°°°°±²± ÓÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+ÉÍÍÍÍÍÍÍÍÍÊÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ¸
+º   Well before you begin to read the whole documentation      ³
+º I would like to say some things.                             ³
+º FIRST - I'm not very good in English, you may notice some    ³
+º   spelling mistakes or grammar mistakes, try to ignore it.   ³
+º SECOND - Main keys in the graph:                             ³
+º    ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿                          ³
+ÌÍÍÍÍµPANNING           - Arrow Keys³                          ³
+º    ³ZOOM IN           - Page Up   ³                          ³
+º    ³ZOOM OUT          - Page Down ³                          ³
+º    ³STRETCH           - CTRL+Left ³                          ³
+º    ³CONDENSE          - CTRL+Right³                          ³
+º    ³LOCAL MENU        - M         ³                          ³
+ÌÍÍÍÍµBACK TO MENU      - Esc       ³                          ³
+º    ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ                          ³
+º THIRD - bugs.                                                ³
+º   I hope you will read the hole document, but if you don't   ³
+º   intend to at least read about these bugs.                  ³
+º   1 - In the graph : I wrote the program so that on          ³
+º     slow computers (like 386/486 - if they still exist...)   ³
+º     the zoom and pan will be faster. Sometimes it's doing    ³
+º     the opposite - it's making the zoom and pan slower!      ³
+º     pressing 'T' will fix the problem (a better method is to ³
+º     select calibrate from the menu)                          ³
+ÓÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÒÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+     ÉÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ¼
+°°±²ÛºÛ²±°°°°°°°°°°°°
+°How to use GRAPHIM?°
+°°°°°°°°°°°°±²ÛºÛ²±°°
+ÉÍÍÍÍÍÍÍÍÍÍÍÍÍÍÊÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ¸
+ºI'm going to give you a guided tour on GRAPHIM.                  ³
+ºYou start by typing at the command line GRAPHIM.                 ³
+ºThe first thing you will see is the intro screen, just sit       ³
+º  back and watch it (Well it's not THAT interesting, press       ³
+º  a key as soon as you can if you don't want to be bored to      ³
+º  death :). If the intro is seems to be stuck,just press a key   ³
+º  to continue.                                                   ³
+º  Now you're at the main menu. You have several options,         ³
+º  depending on the .MNU file.                                    ³
+º  To select a command in the menu you can use:                   ³
+º    The mouse - The little arrow in the middle of the screen     ³
+º                is the mouse pointer, move it by moving your     ³
+º                mouse.                                           ³
+º    The Keyboard - Press the arrow keys to highlight the command ³
+º                   you want, press enter to activate it.         ³
+º  All the commands have a description line at the bottom of the  ³
+º  screen, it explains the command.                               ³
+º  Most of the commands have HELP, to get it use:                 ³
+º  the mouse - press the right button on the menu.                ³
+º  the keyboard - highlight the menu item and press F1            ³
+º  When pressing the keyboard, the mouse will hide for speed.     ³
+ÓÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÒÄÄÄÄÄÄÄÄÄÄÄÄÄÒÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+                        ÛºÛ²±°°°°°°°±²ÛºÛ
+                        ÛºMenu commandsºÛ
+                        ÛºÛ²±°°°°°°°±²ÛºÛ
+ÉÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÊÍÍÍÍÍÍÍÍÍÍÍÍÍÊÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ¸
+º ENTER FORMULA : Enter the formula to be calculated and drawn.  ³
+º                 The formula is at the format : "Y = 2 * X ^ 2" ³
+º                 that is eqwel to : "Y = 2xı".                  ³
+º                 You can use the following characters :         ³
+º                 +,-,*,/ - Plus, Minus, Multiply, Divide.       ³
+º                           Minus can also use to indicate       ³
+º                           negative number.                     ³
+º                 ^       - Power. 2^3 = 2*2*2 = 8.              ³
+º                 {[(,)]} - Brackets. used to force a precedence.³
+º                             5*(4+3) = 35 > 4+3 = 7  *5 = 35    ³
+º                             5*4+3   = 23 > 5*4 = 20 +3 = 23    ³
+º                 X       - The independent variable.            ³
+º                           the computer put in X every dot      ³
+º                           on the axis and it calculate the Y by³
+º                           the formula.                         ³
+º                 <FUNC>  - SIN, COS, ABS, SQR, TAN...           ³
+º                 > SEE THE ENTER FORMULA SECTION BELOW.         ³
+º DRAW THE GRAPH : Draws the graph according to the formula you  ³
+º                  entered in ENTER FORMULA.                     ³
+º                  Now You Are in the interactive mode.          ³
+º                  You can zoom and pan using the following keys:³
+º                  ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ·              ³
+º                  ³PANNING           - Arrow Keysº              ³
+º                  ³ZOOM IN           - Page Up   º              ³
+º                  ³ZOOM OUT          - Page Down º              ³
+º                  ³STRETCH           - CTRL+Left º              ³
+ÌÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍµCONDENSE          - CTRL+RightÇÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´
+º                  ³BIG/SMALL STEPS   - DEL       º              ³
+ÌÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍµINPUT RANGES      - R         ÇÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´
+º                  ³AUTO FIT          - A         º              ³
+º                  ³INVESTIGATE       - I         º              ³
+º                  ³FUNCTION FILL     - F         º              ³
+º                  ³HIDE AXES         - X         º              ³
+º                  ³ZOOM BOX          - Z         º              ³
+º                  ³CALIBRATE TIMING  - T         º              ³
+º                  ³ENTER MENU        - M         º              ³
+º                  ³HI RES DRAW       - L         º              ³
+º                  ³COLORIZE          - C         º              ³
+º                  ³SAVE GRAPH        - S         º              ³
+º                  ³LOAD GRAPH        - Enter     º              ³
+º                  ³CAPTURE THE GRAPH - `         º              ³
+º                  ³INPUT FORMULA     - Space     º              ³
+º                  ³COMPARE MODE      - '='       º              ³
+º                  ³BACK TO MENU      - Esc       º              ³
+º                  ÔÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ¼              ³
+º                  More Options Are Described In The Section     ³
+º                  DRAW THE GRAPH Below.                         ³
+º RANGES : The ranges Menu allow you to enter the graph ranges:  ³
+º          The defaults are shown in the graph.                  ³
+ÇÄÄÄÄÄÄÄÄÄÄÄÄÄÒÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÒÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´
+º°°°°°°°°°°±²ÛºÛ              Y^                 ÛºÛ²±°°°°°°°°°°°³
+º°°°°°°°°°°±²ÛºÛ               ³MAX Y = 20       ÛºÛ²±°°°°°°°°°°°³
+º°°°°°°°°°°±²ÛºÛ               ³                 ÛºÛ²±°°°°°°°°°°°³
+º°°°°°°°°°°±²ÛºÛ               ³                 ÛºÛ²±°°°°°°°°°°°³
+º°°°°°°°°°°±²ÛºÛ               ³                 ÛºÛ²±°°°°°°°°°°°³
+º°°°°°°°°°°±²ÛºÛ               ³               X ÛºÛ²±°°°°°°°°°°°³
+º°°°°°°°°°°±²ÛºÛÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÅÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ>ÛºÛ²±°°°°°°°°°°°³
+º°°°°°°°°°°±²ÛºÛMIN X = -20    ³      MAX X = 20 ÛºÛ²±°°°°°°°°°°°³
+º°°°°°°°°°°±²ÛºÛ               ³                 ÛºÛ²±°°°°°°°°°°°³
+º°°°°°°°°°°±²ÛºÛ               ³                 ÛºÛ²±°°°°°°°°°°°³
+º°°°°°°°°°°±²ÛºÛ               ³                 ÛºÛ²±°°°°°°°°°°°³
+º°°°°°°°°°°±²ÛºÛ               ³                 ÛºÛ²±°°°°°°°°°°°³
+º°°°°°°°°°°±²ÛºÛ               ³MIN Y = -20      ÛºÛ²±°°°°°°°°°°°³
+º°°°°°°°°°°±²ÛºÛ                                 ÛºÛ²±°°°°°°°°°°°³
+ÇÄÄÄÄÄÄÄÄÄÄÄÄÄĞÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄĞÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´
+º AUTO FIT : When Auto Fit is turned on GRAPHIM will set the     ³
+º            minimum and maximum of the Y axis according to the  ³
+º            minimum and maximum of the graph.                   ³
+º SCREEN RANGE : This option allow you to enter the area on the  ³
+º                screen that the graph will be drawn at. This is ³
+º                good to compare to or tree or four graphs.      ³
+ÓÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÒÄÄÄÄÄÄÄÄÄÄÄÄÄÒÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+                        ÛºÛ²±°°°°°°°±²ÛºÛ
+                        ÛºEnter FormulaºÛ
+                        ÛºÛ²±°°°°°°°±²ÛºÛ
+ÉÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÊÍÍÍÍÍÍÍÍÍÍÍÍÍÊÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ¸
+º When entering ENTER FORMULA you will notice 3 things:                     ³
+º   A Little Graph : this is a preview of the big graph.                    ³
+º   A Box with Big Letters : in here you will enter the formula             ³
+º   A Box With Small Letters : in here the computer shows you how           ³
+º                              the program GRAPHIM understood your          ³
+º                              formula.                                     ³
+º In the Input box (Big Letters) you can write anything you want,           ³
+º you can use the following keys:                                           ³
+º     Alpha Numeric : to enter the formula.                                 ³
+º     Left and Right : to move the cursor                                   ³
+º     CTRL+Left and Right : To make a selection.                            ³
+º               The selection here not yet support COPY/PASTE.              ³
+º               The main use of the selection is to instantly replace       ³
+º               text. Selected letters has horizontal lines above           ³
+º               and below them.                                             ³
+º     Insert : to switch between INSERT and OVERWRITE mode.                 ³
+º GRAPHIM will translate what you wrote into a formatted function.          ³
+º the formatted version will appears in the little-blue-letters-box.        ³
+º Here are some examples:                                                   ³
+º        2x              => 2 * X                                           ³
+º        2x(x+3          => 2 * X * ( X + 3 )                               ³
+º        1/(2xxx-5x)     => 1 / ( 2 * X ^ 3 - 5 * X )                       ³
+º        qazxgfdgdg+gbd5 => X + 5 {GRAPHIM will ignore bad characters}      ³
+º        gfdsghsdgfsdg   => X ^ 2   {The default formula}                     ³
+º        SIN X           => SIN X                                           ³
+º        F1 X            => SIN X  {Graphim Work with a table of functions.}³
+º In the preview you can see how the graph will look like.                  ³
+º You can use the mouse to control it's zoom and pan:                       ³
+º     PANNING     : Moving the mouse.                                       ³
+º     ZOOMING     : Pressing left button and moving the mouse               ³
+º                   back and fore.                                          ³
+º     STRETCHING  : Pressing left button and moving the mouse               ³
+º                   to the sides.                                           ³
+º     RESTORING   : Pressing right button.                                  ³
+º     AXES TOGGLE : Pressing Middle button.                                 ³
+º FORMAT OF THE FORMULA :                                                   ³
+º   "-" (minus) :                                                           ³
+º       A - B  > Subtract B from A.                                         ³
+º       -B     > Negative B.                                                ³
+º   "+" (plus)  :                                                           ³
+º       A + B  > Add B to A                                                 ³
+º   "*" (Multi) :                                                           ³
+º       A * B  > Multiply A with B, Add A to himself B times.               ³
+º   "/" (divide)   :                                                        ³
+º       A / B  > Divide A to B Parts.                                       ³
+º   "^" (power) :                                                           ³
+º       A ^ B  > Raise A by the power of B. multiply A with himself B times ³
+º       A ^ 5  > A * A * A * A * A                                          ³
+º       A ^ «  > ûA                                                         ³
+º       A ^ -2 > 1 / (A ^ 2)                                                ³
+º   "({[,]})" (brackets) : (*)                                              ³
+º       5 * (1 + 2)  1+2 will be calculated first = 15                      ³
+º       5 * 1 + 2    5*1 will be calculated first = 7                       ³
+º       5 {1 + 2}    = 5 * (1 + 2) = 15                                     ³
+º       (1+2)[3+2    = (1 + 2) * (3 + 2) = 3 * 5 = 15                       ³
+º       (1 + 2) ^ 2  = 3 ^ 2 = 9                                            ³
+º       (1 + 2)2     = (1 + 2) ^ 2 = 9                                      ³
+º   "X" (The independent variable) :                                        ³
+º       5 * X > will multiply every X in the X axis with 5                  ³
+º       5X    = 5 * x                                                       ³
+º       5X^2  = 5 * X ^ 2                                                   ³
+º       5X4   = 5 * X ^ 4                                                   ³
+º       XXXX  = X ^ 4                                                       ³
+º (*) - THE BRACKETS                                                        ³
+º   - GRAPHIM will automatically close opened brackets :                    ³
+º     5 * (2 + 3 = 5 * (2 + 3)                                              ³
+º FUNCTIONS:                                                                ³
+º                     ÕÍÍÍÍËÍÍÍÍÍÍÑÍÍÍÍÍÍÍÍÍÍÍÍÍÍÑÍÍÍ»                      ³
+º                     ³V1.1ºSIN   ³ SINUS        ³ F1º                      ³
+º                     ³V1.1ºCOS   ³ COSINUS      ³ F2º                      ³
+º                     ³V1.1ºABS   ³ ABSOLUTE     ³ F3º                      ³
+º                     ³V1.1ºSQR   ³ SQUARE ROOT  ³ F4º                      ³
+º                     ³V1.3ºTAN   ³ TANGENCY     ³ F5º                      ³
+º                     ³V1.4ºCOTAN ³ 1/TAN        ³ F6º                      ³
+º                     ³V1.4ºLN    ³ LOG base E   ³ F7º                      ³
+º                     ³V1.4ºPI    ³*PI * X       ³ F8º                      ³
+º                     ³V1.4ºE     ³*E ^ X        ³ F9º                      ³
+º                     ÔÍÍÍÍÊÍÍÍÍÍÍÏÍÍÍÍÍÍÍÍÍÍÍÍÍÍÏÍÍÍ¼                      ³
+º (*) these are actually constants (pi=3.14 ...) but they are written here  ³
+º     to convenience. I wrote the relation of the const to X after it       ³
+º     pi x = 3.14 * x / e x = e^x                                           ³
+º EDITING :                                                                 ³
+º   You can use the following editing keys inside the input box :           ³
+º       ÉÍÍÍÍÍÍÍÍÍÍÍÍÍÑÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ¸                    ³
+º       ºLEFT & RIGHT ³ Move the cursor                ³                    ³
+º       ºCTRL+ <- / ->³ Make a selection               ³                    ³
+º       ºHOME & END   ³ Beginning and end of line      ³                    ³
+º       ºINSERT       ³ Toggle INSERT/OVERWRITE mode   ³                    ³
+º       ºBACK SPACE   ³ Erase the left character       ³                    ³
+º       ºDELETE       ³ Erase the char under the cursor³                    ³
+º       ÓÄÄÄÄÄÄÄÄÄÄÄÄÄÁÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ                    ³
+ÈÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍËÍÍÍÍÍÍÍÍÍÍÍÍÍÍËÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ¾
+                  ÛºÛ²±°°°°°°°°±²ÛºÛ
+                  ÛºDraw The GraphºÛ
+                  ÛºÛ²±°°°°°°°°±²ÛºÛ
+ÖÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄĞÄÄÄÄÄÄÄÄÄÄÄÄÄÄĞÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+º   Introduction: The graph draw window is the heart of the      ³
+º                  program. Here is where the formula you have   ³
+º                  entered in Enter formula window is drawn.     ³
+º                  You can interactively Zoom and Pan with the   ³
+º                  arrow key and pgup/pgdown. All the shortcut   ³
+º                  keys are listed above.                        ³
+º                                                                ³
+º  The interface: The navigation keys of the graph are listed    ³
+º                  above. Just to remind you the main things:    ³
+º                  the arrow keys move around the graph.         ³
+º                  PgUp and PgDown zoom in and out.              ³
+º                  CTRL+Left/Rigt strech the X axis.             ³
+º                  "M" enters the graph menu.                    ³
+º                                                                ³
+º   The Coordinate Box: Moving the mouse will get you in the     ³
+º                  coordinate system. You will see a cross (Å)   ³
+º                  and a box with coordinates. when moving the   ³
+º                  cross the coordinate box will be updated.     ³
+º                  if the box is hiding something important you  ³
+º                  can Drag it to another place.                 ³
+º                  Under the CoordBox You'll see a referance of  ³
+º                  the formula, in case you have forgotten, or in³
+º                  case you just Restored a Saved graph and you  ³
+º                  want to know its formula.                     ³
+º                  The box will move with the CoordBox. Pressing ³
+º                  it will hide it.                              ³
+º                  If you press with the right mouse button, the ³
+º                  formula box will grow, alowing you to EDIT THE³
+º                  FORMULA DIRECTLY. by pressing enter you accept³
+º                  the changes and the graph will automatically  ³
+º                  be updated! You don't need to leav the graph  ³
+º                  at all!                                       ³
+º                  Pressing a key will return you back to the    ³
+º                  graph.                                        ³
+º                  You will notice that the mouse sticks to the  ³
+º                  graph line, rather then travel around the     ³
+º                  graph where no mice has gone before ...       ³
+º                  The CoordBox will show the exact result of the³
+º                  pointer even if the graph is way beyond the   ³
+º                  visiable area.                                ³
+º                  you can switch between snap and no snap by    ³
+º                  pressing the middle button of the mouse.      ³
+º                                                                ³
+º    the ZOOM BOX: By pressing the mouse and moving it forward,  ³
+º                  or by pressin Z, or by selecting the menu item³
+º                  you enters the ZOOM BOX.                      ³
+º                  The ZOOM BOX is a box that you move around    ³
+º                  the graph with the mouse or the arrow keys    ³
+º                  shrink/enlarge by holding the mouse button and³
+º                  moving it forward and backward (or with the   ³
+º                  keys PGUP/PGDN) and stretch it by holding the ³
+º                  mouse button and moving it to the sides. when ³
+º                  confirming it by pressing the right mouse     ³
+º                  button (or enter) the graph will zoom to the  ³
+º                  ranges represented by the box.                ³
+º                  (V2.2) You can even see a small preview of the³
+º                  graph after the zoom. If it bothers you,      ³
+º                  you can press F2 to make it disappeare.       ³
+º   THE MENU: The program have a context menu with some functions³
+º                  you can implement on the graph. press with the³
+º                  right mouse button anywhere to enter the menu.³
+ÇÄÄÄÄÄÄÄÄÄÄÄÄÒÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÂÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÁÄÄÄÄ¿
+º            ºThe options are:³                                       ³
+º            ÌÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍØÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ¸ ³
+º            º SAVE           ³  Save the graph to a file           ³ ³
+º            º RESTORE        ³  Restore graph from file            ³ ³
+º            º SAVE BITMAP       Capture the screen into BMP file   ³ ³
+º            ÇÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÅÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´ ³
+º            º AUTO FIT       ³  Automatically find the best Y range³ ³
+º            º RANGES         ³  Specify ranges manually            ³ ³
+º            º RESET RANGES   ³  Reset the ranges                   ³ ³
+º            º ZOOM BOX       ³  Enter the ZoomBox                  ³ ³
+º            ÇÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÅÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´ ³
+º            º INVESTIGATE    ³  Investigates the graph             ³ ³
+º            º COLORIZE          Permenantly tuggle colorize        ³ ³
+º            º COMPARE MODE   ³  Activate compare                   ³ ³
+º            º COMPARE FUNC   ³  Enter formula to compare           ³ ³
+º            ÇÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÅÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´ ³
+º            º FUNCTION  FILL ³  Fill the graph                     ³ ³
+º            º SHOW AXES      ³  Show/hide the axes                 ³ ³
+º            º AXES LABELS    ³  Show/hide numbers                  ³ ³
+º            ÇÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÅÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´ ³
+º            º CALIBRATE      ³  Calibrate timing                   ³ ³
+º            º HELP           ³  Show help                          ³ ³
+º            ÈÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÏÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ¾ ³
+º     Here is an explenation for some of the functions:               ³
+º       SAVE/RESTORE: These Functions let you save the formula        ³
+º              and ranges you are currently using, and restore        ³
+º              them when needed. In the Save box you enter a          ³
+º              name for the graph. When you select Restore - a        ³
+º              list appears with all the names you saved. Just        ³
+º              press one to select it.                                ³
+º                                                                     ³
+º        SAVE BMP: Saves the graph as shown on screen to a bitmap.    ³
+º              BITMAP formart is the most common picture format.      ³
+º              When saving the graph picture in bitmap format         ³
+º              you can import it to WORD, use it as a wallpaper,      ³
+º              edit it in a picture editor (such as PaintBrush)       ³
+º              or even convert it to WMF - if you have an OCR         ³
+º              available. Off coarse that once you have it -          ³
+º              you can print it.                                      ³
+º                                                                     ³
+º       RESET RANGES: Reset the ranges to the ranges you started      ³
+º              when you entered the Draw Graph box.                   ³
+º                                                                     ³
+º       INVESTIGATE: Investigate do 2 things. first it colorize       ³
+º              the graph according to its accending(/) or             ³
+º              descending(\) state. Then it find all the peaks        ³
+º              and valies and prints their coordinates. The           ³
+º              coordinates are not very exact, so you will have       ³
+º              to zoom in to the portion you want and activate        ³
+º              the investigate again.                                 ³
+º                                                                     ³
+º       INPUT RANGES: This function allows you to input new ranges    ³
+º              while inside the graph. On the screen you can see 4    ³
+º              input boxe, one for each end. You can enter the range  ³
+º              you want in the selected box (shown like a sunken). To ³
+º              move between boxes, use the mouse or press             ³
+º              TAB/SHIFT+TAB.                                         ³
+º                                                                     ³
+º       COMPARE MODE: Maybe you want to see two graphs together,      ³
+º              and compare between them. This function allows you     ³
+º              to do it. Just enter a new formula in the ENTER        ³
+º              FORMULA box and the new graph will appear next to      ³
+º              the old graph, in different color. You can still do    ³
+º              all the functions (ZOOM,PAN,FILL...) and the graphs    ³
+º              will stick together, until you deselect this function. ³
+º              COMPARE FUNC lets you change the second formula        ³
+º              without exiting the Compare Mode.                      ³
+º                                                                     ³
+º         SHOW AXES: Can hide the axes for better view of the graph   ³
+º              shape.                                                 ³
+º                                                                     ³
+º         AXES LABLES: Can hide the numbers for better view of the    ³
+º              graph shape, with reference to the location.           ³
+º                                                                     ³
+º         CALIBRATE: Sometimes the Zoom and Pan are not smooth.       ³
+º              To make the smoother you need to recalibrate the       ³
+º              Fast Draw timing.                                      ³
+ÈÍÍÍÍÍÍÍÍÍÍËÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍËÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ¾
+           ÓÄÄÄÄÄÄÄÄÄÄÄÄÒÄÄÄÄÄÄÄÄÄÄÄÄÄ½
+           ÉÍÍÍÍÍÍÍÍÍÍÍÍÊÍÍÍÍÍÍÍÍÍÍÍÍÍ»
+       °±²ÛºÛ²±°°°±²ÛÛ²±°°°°°°°°°°°±²ÛºÛ²±°
+        °±²º² The New Main Interface ²º²±°
+       °±²ÛºÛ²±°°°°°°°°°°°°±²ÛÛ²±°°±²ÛºÛ²±°
+       ÉÍÍÍÊÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÊÍÍÍ»
+ÉÍÍÍÍÍÍÊÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÊÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ¸
+º  OVERVIEW :                                                              ³
+º           And now... Introducing - THE NEW USER INTERFACE!!!             ³
+º           So What Is IT?                                                 ³
+º             Well, The new user interface (Main Graph from now) is an     ³
+º             easy to use complately mouse based integration of all that   ³
+º             you read above. Actualy its a bombastic way of saying you    ³
+º             can now do things with the graph (like explore it) faster    ³
+º             and easyer!                                                  ³
+º           Y?!?                                                           ³
+º             Why did I made the Main graph? The same reason I made all    ³
+º             the other stuff in graphim - for the challange, and to have  ³
+º             an excuse to advance a version...                            ³
+º           What so differant?                                             ³
+º             The Main graph is constructed very differant from the old    ³
+º             graph interface. While the old one worked in timeline driven ³
+º             engine (an action leads to another), the new one wworks in   ³
+º             "event Driven Engine" wich meens that YOU say to the program ³
+º             what you want to do in any given time, instead of the program³
+º             giving you options. This technic is Idential to how windows  ³
+º             works (well, maybe not IDENTIAL, but very similar...).       ³
+º             The menu is always available to you, the coordinates to.     ³
+º             Everything is just a mouse click away. And thats whay You    ³
+º             minimize you tuching on the keyboard. Alsow I tryed not to us³
+º             the middle mouse button, cause I know not everyone has it.   ³
+ÓÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÂÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+        ÖÄÄÄÄÄÄÄÄÄÄÄÙ
+   °°±²ÛºÛ²±°°°°°
+   ° How To use °
+   °°°°°±²ÛºÛ²±°°
+ÉÍÍÍÍÍÍÍÍÍÍÊÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ¸
+º SCREEN LAYOUT:                                                    ³
+º       The screen is very similar to the old graph screen.         ³
+º       Only that now you can see a Menu that enable you to access  ³
+º       directly to all the functions available. Next to it you     ³
+º       can see to boxes with the letters Z and P, wich alow you    ³
+º       to quickly Zoom and Pan. Just click and move the mouse.     ³
+º       Next to them there is the Known Coordinate box.             ³
+º USING: Very easy. All functions are accessible thrue the menu.    ³
+º       The menu is divided for comforty into 4 submenus:           ³
+º       'File' for disk operation like load, save and exit.         ³
+º       'Graph' for drawing operation like Fill, Draw axis          ³
+º               and more.                                           ³
+º       'Inspect' for analizing operation like compare and          ³
+º               investigate.                                        ³
+º       'Formula' for changing the formula and doing operations     ³
+º               on it.                                              ³
+º       'Help' for some help screens                                ³
+º                                                                   ³
+º       Two more submenus inside the inspect menu are the compare   ³
+º         and settings menu. The settings are for the investigation ³
+º                                                                   ³
+º       'Z' and 'P' for zoom and pan (The camera meaning).          ³
+º               Just click and drag.                                ³
+º       'F' for Fast Formula                                        ³
+º                                                                   ³
+º       All the special key that exist in the old graph screen, now ³
+º       available here too.                                         ³
+º                                                                   ³
+º       Move the mouse around to see the coordinate box updating.   ³
+º       Press the right mouse to swich to and from snap.            ³
+º       Press the Left mouse to enter the ZoomBox.                  ³
+º       Press the middle mouse to instat pan. Press the alt to      ³
+º       swich into instant zoom, this work with the Z P buttons     ³
+º       as well.                                                    ³
+º                                                                   ³
+º       The box in th upper right corner of the screen shows you the³
+º       coordinates. clicking on it will cycle between type of data ³
+º       to show:                                                    ³
+º       -> Coords -> Formula -> Calculated Area ->                  ³
+º       -> Version -> X min/max -> Y min max                        ³
+º                                                                   ³
+º       Thats it. All the menu functions are explained earlier.     ³
+º                                                                   ³
+º       There are verry little 'GRPHIM.INI' settings available      ³
+º         right now. There is no need for more...                   ³
+ÓÄÄÄÄÄÄÄÄÄÄÒÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+           ÈÍÍ»
+          °±²ÛºÛ²±°
+          ° Misc. °
+          °±²Û³Û²±°
+ÖÄÄÄÄÄÄÄÄÄÄÄÄÄÁÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+ºWith GRAPHIM you get the file GRAPHIM.INI. In this file you      ³
+º     can change almost EVERYTHING in the program. Just edit it   ³
+º     with a normal text editor (Like notepad, or SETUP.COM that  ³
+º     come with graphim). You can chane things from the color and ³
+º     behavior of the menus to the default formula and the screen ³
+º     resolution.                                                 ³
+º     options like Fast Draw Resolution and Hi Res Ratio let you  ³
+º     set the perfomence to mach your computer. and more and more.³
+º     you can even use ANOTHER MENU. I included two menu files,   ³
+º     one in english and one in hebrew. Just write the menu you   ³
+º     want in the right section in the file GRAPHIM.INI.          ³
+º     In this file there are explenations about everything, so    ³
+º     you wont have to guess.                                     ³
+º As I mentioned, you can select from two types of menus, But     ³
+º     you can even write your own!                                ³
+º     Just edit the file HEBREW.MNU or ENGLISH.MNU, and enjoy.    ³
+º     There too you have a full explenation of how to do it.      ³
+º     Dont forget to make a backup.                               ³
+º In version 2.3 I created the New Main Graph interface wich is   ³
+º     event driven interface. Yes, it actually behave like a      ³
+º     window in Ms Window (except it cant be resized). The thing  ³
+º     is that I wanted to keep the old interface, so there are now³
+º     diffarent independed programs within one. Althow they do    ³
+º     communicate with each other. You can edit your own menu to  ³
+º     give you only one of the options. Anyway, what I wanted to  ³
+º     say is that there are no menu definition, behavior or       ³
+º     settings you can change in GRAPHIM.INI. Maybe in later      ³
+º     versions...                                                 ³
+ÈÍÍÍÍÍÍÍÍÍÍÍÍÍÑÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÑÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ¾
+              ³                       ³
+              ÀÄÄÄÄÄÂÄÄÄÄÄÄÄÄ¿        ³
+                    ÃÄÄÄÄÄÄÄÄÅÄÄÄÄÄÄÄÄÙ
+              ÉÍÍÍÍÍÏÍÍÍÍÍÍÍÍÏÍÍÍÍÍÍÍÍ»
+              º                       º
+    ÉÍÍÍÍÍÍÍÍÍÊÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÊÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ»
+°±²ÛºÛ²±°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°±²ÛºÛ²±°°°°°
+°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
+°°°±²ÛºÉÍÍÍÍ°º°°°°º°ÉÍÍÍ»°ÉÍÍÍ»°ÉÍÍÍ»°ÉÍÍÍ»°ÍÍËÍÍºÛ²±°°°°°°°°°°°°°°°°°°
+°°°±²Ûºº°°°°°º°°°°º°º°°°º°º°°°º°º°°°º°º°°°º°°°º°°ºÛ²±°°°°°°°°°°°°°°°°°°
+°°°±²ÛºÈÍÍÍ»°º°°°°º°ÌÍÍÍ¼°ÌÍÍÍ¼°º°°°º°ÌÍËÍ¼°°°º°°ºÛ²±°°°°°°°°°°°°°°°°°°
+°°°±²Ûº°°°°º°º°°°°º°º°°°°°º°°°°°º°°°º°º°ÈÍ»°°°º°°ºÛ²±°°°°°°°°°°°°°°°°°°
+°°°±²ÛºÍÍÍÍ¼°ÈÍÍÍÍ¼°º°°°°°º°°°°°ÈÍÍÍ¼°º°°°º°°°º°°ºÛ²±°°°°°°°°°°°°°°°°°°
+°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
+°°°°°°°°°°°°°°°°°°°°°°°°°°°°°±²ÛºÛ²±°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
+ÉÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÊÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ¸
+ºItzhak Arzony :                                                      ³
+º---------------                                                      ³
+º  Israel. Nazareth illit. Havazelet 19/29. 17543                     ³
+º  TEL: 06-6570861 054-570861                                         ³
+º  E-MAIL: Iapp@4email.com                                            ³
+º                                                                     ³
+ºPLEAS contact me and tell me:                                        ³
+º  -That you want to support me with some money :)                    ³
+º  -If you liked the program or not.                                  ³
+º  -What can I improve?                                               ³
+º  -What should I add?                                                ³
+º  -Do you want the source code?                                      ³
+º    Well, I can't give you the source code, but I can tell you this: ³
+º      I programmed the program in PASCAL.                            ³
+º      More then 7600 lines on 28 files                               ³
+ÓÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÒÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+     ÉÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ¼
+°°±²ÛºÛ²±°°
+° HISTORY °
+°°±²ÛºÛ²±°°
+     ÈÍÍÍÍÍÍÍÍÍÍÍÍ»
+ÉÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÊÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ¸
+º Well, only in V1.4 I'm starting to write the history.        ³
+º until then (and even IN V1.4) it's just from the memory.     ³
+º Started working on it about in July 1998, I was in 11th grade³
+º First releas: I Don't really know when.                      ³
+º  Well, actually, GRAPHIM was never released! it always stayed³
+º  on my computer, waiting for the big opportunity...          ³
+º [-] - BUG FIX                                                ³
+º [+] - ADDITION TO THE PROGRAM                                ³
+º [*] - NOTE                                                   ³
+º V0.5 (about 15/07/1998)                                      ³
+º   Included:                                                  ³
+º     Basic formula interpretation (no brackets & function)    ³
+º     Graph drawer with basic zoom and pan                     ³
+º     Auto fit                                                 ³
+º     B/W flat interface                                       ³
+º     Menu file                                                ³
+º     Graphim.ini                                              ³
+º     Installation program                                     ³
+º V1.0 (about 20/09/1998)                                      ³
+º   [+] Bracket processing in the formula                      ³
+º   [+] Coordinate box                                         ³
+º   [+] 3D color interface                                     ³
+º   [+] Mouse support                                          ³
+º   [+] Help                                                   ³
+º V1.1 (Unsolved mysteries...)                                 ³
+º   [*] Actually, never released...                            ³
+º   [+] Function Proccessing: sin,cos,abs,sqr                  ³
+º   [+] Zoom box - didn't work                                 ³
+º   [+] Documentation                                          ³
+º V1.2 (??/??/1999)                                            ³
+º   [+] Inside-the-graph menu                                  ³
+º   [+] Function Fill                                          ³
+º V1.3 (??/01/2000)                                            ³
+º   [*] Known history documentation start here                 ³
+º   [+] Functions: Tan,Cotan,Pi,E,Ln                           ³
+º   [+] Save coordinates                                       ³
+º   [-] Faster Zoom&Pan                                        ³
+º   [*] screen was scrambled when returning to menu            ³
+º   [-] Zoom box was fixed                                     ³
+º   [-] Fixed floating point processing                        ³
+º   [+] More 3D effects...                                     ³
+º V1.4 (05/5/2000)                                             ³
+º   [*] Writing this document                                  ³
+º   [-] Fixed screen scramble when returning to menu           ³
+º   [-] improved HELP box                                      ³
+º   [-] Fixed bug with power of X (2^X)                        ³
+º   [+] Compare formula                                        ³
+º   [+] Developing investigation (change in GRAPHIM.INI)       ³
+º   [+] Snap mouse to graph                                    ³
+º   [+] Fill 2 colors                                          ³
+º   [+] Selection to the Input graph                           ³
+º   [+] File description                                       ³
+º   [*] Menu structure changed (ENGLISH.MNU)                   ³
+º V1.5 (25/12/2000)                                            ³
+º   [+] NEW Investigation: writes MIN & MAX with coords        ³
+º   [*] Old investigation now called Colorize                  ³
+º   [*] "Colorize" in INI file now called "GraphColorize"      ³
+º   [-] Fixed boxes that left some garbage after exit          ³
+º   [-] Fixed negative X processing                            ³
+º   [++] SAVE & RESTORE functions and ranges                   ³
+º   [+] Extra accurate option (press "L")                      ³
+º V2.0 (9/3/2001)                                              ³
+º   [-] The Coords box more accurate.                          ³
+º   [+] SpaceSeperator in GRAPHIM.INI                          ³
+º   [*] Fixed formula status ( X(sin X+2) => X sin (X+2)       ³
+º   [+] Added formula line under the Corrd Box                 ³
+º   [++] You can edit the formula directly in the graph mode   ³
+º   [-] The coordbox now integrate better with the system      ³
+º   [-] Fixed garbage on the screen in Compare mode            ³
+º   [-*] Error in Input didn't alow entering lines like E(x/2) ³
+º   [-] Improved the install program                           ³
+º V2.1 (26-5-2001)                                             ³
+º   [--] Fixed major bug in negative '-' calculation           ³
+º   [-] Fixed bug in Reset Ranges inside the graph             ³
+º   [-] Fixed a bug in Input Ranges inside the graph           ³
+º   [-] Retuched the investigation (alsow add INI parameter)   ³
+º V2.2 (8-9-2001)                                              ³
+º   [*] Changed internal "draw" structure                      ³
+º   [-] Fixed bug in readin F... style functions               ³
+º   [+] ZoomBoxPreview - No more explore in the dark           ³
+º   [+] Added One Line Scrolling to the help                   ³
+º   [-] Fixed problem with key that pressed in MouseCoord mode ³
+º   [-] Fixed the display off the formula in coord mode        ³
+º   [-] Fixed display of the investigation in some cases       ³
+º   [-] Fixed incorrect position of the text marker....        ³
+º V2.3 (19-10-2002) (I neglected it for a long time)           ³
+º   [++] *INTRODUCING: The new Event Driven Interface.         ³
+º   [-] bug fixed inside graphs that dont use all the screen   ³
+º V2.4 (23-11-2002)                                            ³
+º   [-] Fixed synchronization between the 2 graph screens      ³
+º   [-] Fixed line scrolling problem with the help             ³
+º   [+] Added Mouse contro to the help                         ³
+º   [-] Fixed problem with menus that took more then one row   ³
+º   [+] Added keyboard interface to Main Graph                 ³
+º   [+] Added More Options to the Save- axes, colorize, compare³
+º   [+] Added Menu items & changed apperiance                  ³
+º   [-] Improved scrolling with the mouse using 'Z' and 'P'    ³
+º   [+] Added Zoom/Pan when middle mouse press inside the graph³
+º   [+] Added alternate action in zoom/pan by pressing ALT     ³
+º   [*] Main graph menus in flat style...                      ³
+º   [+] Now investigate show crossing points with axes         ³
+º   [++] NEW - Saving in BMP format to use in WORD or stuff    ³
+º   [-] Fixed a very slow Ranges dialog.                       ³
+º   [*] arranged some menu in the Main Graph.                  ³
+º   [-] enhanced the integration with the compared formula.    ³
+º   [-] Fixed KB timer in main graph for smooth kb scrolling   ³
+º V2.5                                                         ³
+º   [-] Fixed inaccuracy in axis display                       ³
+º   [+] Area calculation (can see it by pressing the coord box)³
+º   [+] Coord box display more data by pressing on in          ³
+  V2.6
+    [+] Now can compare up to 4 formulas at once
+    [+] Can add,Edit,Del and sync them with the main graph
+    [+] added graph line width to the new interface
+    [+] added Fill from buttom
+    [-] fixed problems with AutoFit
+    [-] fixed the ranges dialog
+    [*] rearranged the graph menu
+    [+]
+
+ÈÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍËÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ¾
+                              º
+                              º
+           ÉÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÎÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ»
+           º ÉÍÍÍÍÍÍÍÍÍÍÑÍÍÍÍÍÊÍÍÍÍÍÑÍÍÍÍÍÍÍÍÍÍ» º
+           º ÇÄÄÄÄÄÄÄÄÄÄ´  THE END  ÃÄÄÄÄÄÄÄÄÄÄ¶ º
+           º ÈÍÍÍÍÍÍÍÍÍÍÏÍÍÍÍÍÑÍÍÍÍÍÏÍÍÍÍÍÍÍÍÍÍ¼ º
+           ÈÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍØÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ¼
+                              ³
+                              ³
+                              ³
+                              ³
+                              ³
+                              ³
+                              ³
+             ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÁÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+             ³ You actually read until here ?! ³
+             ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÂÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+                              ³
+                              ³
+                              ³
+                              ³
+                              ³
+                              ³
+                              ³
+                              ³
+
+
+
+
+
+
+
+                             10X
+
+

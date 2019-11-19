@@ -1,0 +1,223 @@
+unit usergr;
+{ After selecting menu item in MENUGR unit }
+{ USER actualy does something with the selected item }
+interface
+uses exbox,general,draw_gr,udr_gr,menugr,drivers,inifiles,menuproc,
+			set_gr,boxes,bxdialog,bituy,mousebx,gr_main;
+
+type
+	user=object
+		exit:boolean;
+    menuID:byte;
+		menu1:menudisplay;
+		procedure init;
+		procedure SwichMenu(whatMenu:byte);
+		procedure dothegraph;
+		procedure dothemenu;
+		procedure handlectl;
+		procedure getinput;
+		procedure GetScreenRange;
+		procedure GetAllRanges;
+		procedure GetMinimumX;
+		procedure GetMaximumX;
+		procedure GetMinimumY;
+		procedure GetMaximumY;
+	end;
+
+implementation
+{*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*}
+{*          USER OBJECT PROCEDURES           *}
+{*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*}
+procedure user.init;
+begin
+{	the_graph.init(0,0,swidth,shight);}
+	menu1.init('');
+	SwichMenu(1);
+end;
+
+procedure user.dothegraph;
+begin
+  the_graph.init(0,0,swidth,shight);
+	the_graph.autofit:=autofit;
+  the_graph.setfunc(activeformula);
+	the_graph.interactive;
+  the_graph.bye;
+end;
+
+procedure user.SwichMenu;
+var i1,i2:integer;
+	MenuItemTitle,
+	MenuDesc:string;
+	MenuHelp :byte;
+	MenuCtl	:byte;
+	MenuItems : byte;
+	GNP : boolean;
+
+begin
+	GNP := true;
+  menu1.hide;
+	openINI(menufile);
+	ClearValue:=false;
+	GotoSector('MENU0'+stry(whatMenu,1,0));
+	getNextParameter;
+	if Variable='MENUITEMS' then menuitems:=vali(value);
+	getNextParameter;
+	if Variable='TITLE' then menu1.reinit(value);
+	i1 :=	0;
+	for i1 := 1 to menuitems do begin
+		if gnp then GetNextParameter;
+		gnp := true;
+		if variable = 'ITEM0'+stry(i1,1,0)+'.TITLE' then MenuItemTitle:=value;
+		GetNextParameter;
+		if variable = 'ITEM0'+stry(i1,1,0)+'.DESCRIPTION' then MenuDesc:=value;
+		GetNextParameter;
+		if variable = 'ITEM0'+stry(i1,1,0)+'.CTL' then MenuCtl:=vali(value);
+		GetNextParameter;
+		MenuHelp := 0;
+		if variable = 'ITEM0'+stry(i1,1,0)+'.HELP' then begin
+			MenuHelp:=vali(value);
+		end else GNP := false;
+		menu1.insert(MenuItemTitle,MenuDesc,MenuCtl,MenuHelp);
+	end;
+	if MenuAutoSIze then menu1.makesamesize;
+	menu1.select(1);
+  closeini;
+	menuID:=WhatMenu;
+end;
+
+procedure user.dothemenu;
+begin
+	repeat
+		menu1.domenu;
+		handlectl;
+	until exit;
+	menu1.bye;
+end;
+
+procedure user.handlectl;
+var ctl:byte;
+	mhelp:byte;
+begin
+	ctl:=menu1.getctl;
+	mhelp := menu1.gethelp;
+	menu1.hide;
+	case ctl of
+		doinput   		: GetInput;
+		doMinimumX		: GetMinimumX;
+		doMaximumX		: GetMaximumX;
+		doMinimumY		: GetMinimumY;
+		doMaximumY		: GetMaximumY;
+		doRanges			: GetAllRanges;
+		doAutofit 		: if GetAutoFit then the_graph.setautofit(on);
+		doFunctionFill: GetFunctionFill;
+    doRangesReset : GetRangesReset;
+		doScRange			: GetScreenRange;
+		doLineWidth		: GetLineWidth;
+		doHelp				:	DoTheHelp(1);
+		doGraph				: DoTheGraph;
+    domain        : begin
+    									gr_init;
+                      gr_run;
+                      gr_quit;
+                    end;
+    doInvestigate : GetInvestigate;
+		doReturn			:	SwichMenu(1);
+		doMenu1    		: SwichMenu(2);
+		domenu2     	: SwichMenu(3);
+		domenu3     	: SwichMenu(4);
+		domenu4     	: SwichMenu(5);
+		domenu5     	: SwichMenu(6);
+		doExit				: exit:=true;
+    doEsc         : if menuID<>1 then SwichMenu(1) else exit:=true;
+    doProgramReset: Init;
+		showHelp      : DoTheHelp(mhelp); { when pressing F1 }
+	end;
+end;
+
+procedure user.getinput;
+{ get the formula from the user }
+var
+	st,st1 : string;
+begin
+	the_graph.form^.gets(st);
+  st1 := udr_gr.getinput(st);
+  the_graph.setfunc(st1);
+  oldformula := st1;
+  activeformula := st1;
+end;
+
+procedure user.GetAllRanges;
+begin
+	getminimumx;
+	getminimumy;
+	getmaximumx;
+	getmaximumy;
+end;
+
+procedure user.GetMinimumX;
+{ get MINX }
+var
+	st:string;
+begin
+	st := stry(the_graph.minx,0,0);
+	getstr(swidth div 2,shight div 2,'MINX = ',st);
+	the_graph.assign(valr(st),0,0,0);
+end;
+
+procedure user.GetMaximumX;
+{ get MaxX }
+var
+	st:string;
+begin
+	st := stry(the_graph.maxx,0,0);
+	getstr(swidth div 2,shight div 2,'MAXX = ',st);
+	the_graph.assign(0,0,valr(st),0);
+end;
+
+procedure user.GetMinimumY;
+{ get MINX }
+var
+	st:string;
+begin
+	st := stry(the_graph.miny,0,0);
+	getstr(swidth div 2,shight div 2,'MINY = ',st);
+	the_graph.miny:=valr(st);
+	the_graph.assign(0,valr(st),0,0);
+end;
+
+procedure user.GetMaximumY;
+{ get MINX }
+var
+	st:string;
+begin
+	st := stry(the_graph.maxy,0,0);
+	getstr(swidth div 2,shight div 2,'MAXY = ',st);
+	the_graph.assign(0,0,0,valr(st));
+end;
+
+procedure user.GetScreenRange;
+{ get Screen Range }
+var
+	st:string;
+	i1,i2,i3,i4:integer;
+begin
+	st := stry(the_graph.x1,0,0);
+	getstr(swidth div 2,shight div 2,'MINScreenX = ',st);
+	i1:=vali(st);
+
+	st := stry(the_graph.y1,0,0);
+	getstr(swidth div 2,shight div 2,'MINScreenY = ',st);
+	i2:=vali(st);
+
+	st := stry(the_graph.x2,0,0);
+	getstr(swidth div 2,shight div 2,'MAXScreenX = ',st);
+	i3:=vali(st);
+
+	st := stry(the_graph.y2,0,0);
+	getstr(swidth div 2,shight div 2,'MAXScreenY = ',st);
+	i4:=vali(st);
+
+	the_graph.chngdim(i1,i2,i3,i4,cornerbox);
+end;
+
+end.

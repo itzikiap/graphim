@@ -1,0 +1,1054 @@
+unit uDr_Gr;
+{ User Draw - responsibble of all the user interface           }
+{ the purpose of this unit is to seperate the user interface   }
+{    from the graph drawing - saves memory and orginize        }
+interface
+uses draw_gr,set_gr,general,boxes,mousebx,drivers,graph,menugr,
+			bxdialog,exbox,bituy,save_gr,inifiles,udr_dlg,savepic;
+const
+	crdNothing =1;
+  crdZoombox =2;
+  crdMenu    =3;
+  crdChanged =4;
+  crdCheck   =5;
+  crdKbd     =7;
+
+type
+	userdraw=object(draw)
+    ev1:tevent;
+    setdesc:string;
+		jump,i:byte;
+		keytime:timer;
+		timeout:longint;
+		oldminx:real;
+		oldminy:real;
+		oldmaxy:real;
+		oldmaxx:real;
+    c,t:boolean;
+		stop:boolean;
+    comp_link:boolean;
+		constructor init(sx1,sy1,sx2,sy2:integer); { initialize }
+		procedure usermenu;
+    procedure Save;
+    procedure Savebitmap;
+    procedure Restore;
+		function mousecoord:byte; { show mouse coordinates in a box }
+		procedure zoombox; { show a zoom box }
+    procedure keyin;
+    procedure cycle;
+		procedure interactive; { zomming and scrolling interactively }
+    procedure InputCompare; { enter enother formula to compare }
+    procedure colorize; { colorize the graph according to its state }
+  	procedure Investigate; { Actually investigate the graph! }
+	end;
+
+var
+	the_graph:userdraw;
+
+function getinput(nf:string):string;
+implementation
+{*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*}
+{*        USERDRAW OBJECT PROCEDURES         *}
+{*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*}
+constructor userdraw.init;
+{ -----------initialize the user interface }
+begin
+	draw.init(sx1,sy1,sx2,sy2);
+	setdesc := 'GRAPH01';
+end;
+
+function userdraw.mouseCoord;
+{ -----------show mouse coordinates in a box }
+var coordinates:msgbox;
+	formulabx:inputbox;
+	e:boolean;
+  outside:boolean;
+  return:byte;
+  snap:boolean;
+  m:word;
+
+function clearit:string;
+var
+	i:byte;
+  st1:string;
+  wf:string;
+begin
+  form^.gets(wf);
+	st1 :='';
+	for i := 1 to length(wf) do
+  	if wf[i] <> ' ' then st1 := st1+wf[i];
+  clearit := st1;
+end;
+
+begin
+	e:=false;
+  snap := SnapMouseToGraph;
+  return := crdNothing;
+	mouse.mwindow(x1,y1+1,x2,y2);
+  with coordinates do begin
+		init('('+stry(SXtoX(mouse.x),2,2)+' , '+stry((miny+maxy)-SYtoY(mouse.y),2,2)+')',swidth div 2,30);
+		setfont(2,6);
+		set3d(on,on);
+		setmcolor(13,0,1);
+    setjustify(center);
+    settextoffset(0,-9);
+		display;
+	end;
+	with formulabx do begin
+		init('Y = ',clearit,swidth div 2,coordinates.cy+30);
+    enabled := false;
+		setfont(2,6);
+		set3d(on,on);
+    set3dmode(inside);
+		setmcolor(11,0,8);
+    setjustify(center);
+    settextoffset(0,-10);
+    f := false;
+		if FormulaInCoordMode then display;
+	end;
+	with mouse do begin
+		setmousetype(cross);
+    update;
+		display;
+	end;
+	repeat
+    outside := true;
+		with mouse do begin
+			update;
+      with formulabx do begin
+				if isin(x,y) and displayed then begin
+          outside := false;
+          setmousetype(mline);
+          if pressed[1] then begin
+          	mouse.erase;
+            erase;
+            mouse.display;
+            snap := SnapMouseToGraph;
+          end;
+      		if pressed[2] and displayed then begin
+						mouse.erase;
+        		enabled := true;
+            setfont(9,1);
+            move(0,7,relboxmove);
+            setjustify(center);
+            settextoffset(0,0);
+            repeat
+            	getkeyevent(ev);
+	  					sendkey(ev);
+            until not enabled;
+            e := true;
+{          	mouse.display;}
+		        update;
+          end;
+        end;
+      end;
+			with coordinates do begin
+				if Snap then
+					chngmsg('('+stry(SXtoX(mouse.x),2,2)+' , '+stry(form^.calc(SXtoX(mouse.x)),2,2)+')')
+        else
+        	chngmsg('('+stry(SXtoX(mouse.x),2,2)+' , '+stry((miny+maxy)-SYtoY(mouse.y),2,2)+')');
+        if isin(x,y) then begin
+          outside := false;
+					setmousetype(arrow);
+					if buttompressed[1] then begin
+						mwindow(0,0,swidth,shight);
+						mouse.erase;
+						while buttompressed[1] do begin
+							update;
+							while drag do begin
+								if formulabx.displayed then begin
+									formulabx.erase;
+                	formulabx.f := true;
+                end else
+									formulabx.f := false;
+								coordinates.move(xmove,ymove,relboxmove);
+  	            formulabx.move(xmove,ymove,relboxmove);
+              	update;
+							end;
+   	          if formulabx.f then formulabx.display;
+						end; {	while buttompressed[1] do begin }
+						mouse.display;
+            snap := SnapMouseToGraph;
+            update;
+					end; { if buttompressed[1] then begin }
+      	end; { if isin(x,y) then begin }
+			end; { With coordinates do begin }
+      if outside then begin
+        setmousetype(cross);
+				if pressed[2] then begin
+					return := crdMenu;
+					e := true;
+				end;
+	      if drag then begin
+  	      return := crdZoombox;
+    	    e := true;
+      	end;
+	      if released[1] then
+          with formulabx do
+          	if displayed then e := true else
+            	if autosize then autosize := false else e := true;
+		    if pressed[3] then begin
+  		   	Snap := not Snap;
+					mouse.move(0,YtoSY(form^.points[cx])-cy);
+	   		end;
+      end; { if outside }
+		end; { With mouse do begin }
+		mouse.mwindow(x1,y1,x2,y2);
+		getkeyevent(ev);
+	  if ev.what <> evnothing then
+			case ev.keycode of
+				kbF1 : DoTheHelp(23);
+        kbf2 : begin
+        	mouse.erase;
+          with formulabx do begin
+						if displayed then erase else display;
+            f := false;
+          end;
+          mouse.display;
+        end;
+				else begin
+					return := crdKbd;
+					e := true;
+      	end;
+      end;
+  	if {mouse.changed and }Snap then begin
+		  m := YtoSY(form^.points[mouse.x-x1])-mouse.y+y1;
+{      if  mouse.y+m <= y1 then m:=m+1 else if mouse.y+m>=y2 then m:=m-1;}
+			mouse.move(0,m);
+    end;
+	until e;
+	coordinates.bye;
+  if formulabx.changed then begin
+  	setfunc(formulabx.get);
+    getready;
+    return := crdChanged;
+  end;
+  formulabx.bye;
+	mouse.mwindow(0,0,swidth,shight);
+	mouse.erase;
+  mouse.update;
+  ev1 := ev;
+  mousecoord := return;
+end;
+
+procedure userdraw.savebitmap;
+{ --------------Saves graph window into bmp file }
+var desc:string;
+begin
+  desc := 'GRAPH';
+	if Getstr(swidth div 2,shight div 2,'enter image name: ',desc) then begin
+	  mouse.erase;
+  	savebmp(x1,y1,x2,y2,desc);
+  end;
+end;
+
+procedure userdraw.save;
+{ --------------Saves the settings }
+var desc:string;
+begin
+  desc := setdesc;
+	if Getstr(swidth div 2,shight div 2,'Name: ',desc) then begin
+	  form^.gets(Sv_formula);
+  	Sv_minX    		   := minX;
+  	Sv_maxX   			 := maxX;
+  	Sv_minY    		   := minY;
+  	Sv_maxY    		   := maxY;
+  	Sv_FunctionFill  := ToFill;
+  	Sv_Fill2Color    := FillColorize;
+  	sv_colorize      := toColorize;
+  	sv_axes          := not no_axes;
+  	sv_axestext      := axes_text;
+  	sv_complink      := complink;
+  	if sv_complink then comp[1]^.gets(sv_compformula);
+  	Sv_LineWidth 	   := LineWidth;
+  	SaveSettings('iap.grp',desc);
+  	setdesc := desc;
+  end;
+end;
+
+procedure userdraw.Restore;
+{ --------------Restore the settings }
+var desc:string;
+  list:menu;
+  title:msgbox;
+  u:byte;
+  next_sec:string;
+
+begin
+  openINI('iap.grp');
+  with title do begin
+  	init('RESTORE FORMULA',swidth div 2,50);
+    set3D(on,off);
+    set3Dmode(big);
+    setmcolor(1,0,5);
+    setjustify(center);
+  	display;
+  end;
+	with list do begin
+    { Initialize the restore list }
+		init(2,60,right,up,miautoplacey+miwrap+misamesize);
+		setfont(MenuFont,1);
+		hideafter := False;
+    firstitem.setjustify(just(left));
+    u := 1;
+   	next_sec := getnextsector;
+    insert(next_sec,u);
+    inc(u);
+{    firstitem.chngdim(0,0,200,10,centerbox);
+{    firstitem.move(0,0,70,absboxmove);}
+   	next_sec := getnextsector;
+    while next_sec <> '' do begin
+	    insert(next_sec,u);
+  	  inc(u);
+     	next_sec := getnextsector;
+		end;
+		getready;
+	end;
+  closeINI;
+  u := list.domenu;
+  if u <> 0 then begin
+	  desc := upstr(list.firstitem.gettitle);
+ 	 	if RestoreSettings('iap.grp',desc) then begin
+    	assign(sv_minX,sv_maxX,sv_minY,sv_maxY);
+  		ToFill				 			:= sv_FunctionFill;
+  		FillColorize		    := sv_Fill2Color;
+  		toColorize					:= sv_colorize;
+  		no_axes		          := not sv_axes;
+  		sv_axestext      		:= axes_text;
+  		CompLink						:= sv_complink;
+  		if complink then setcomp(sv_compformula);
+  		LineWidth 					 := sv_LineWidth;
+		  form^.sets(Sv_formula);
+  		getready;
+  	end;
+  end;
+  title.bye;
+  list.bye;
+end;
+
+procedure userdraw.zoombox;
+{ --------------show a zoom box }
+var
+	zbx1,zbx2,zby1,zby2:integer;
+	zbrx1,zbrx2,zbry1,zbry2:extended;
+	ratio:extended;
+  r:real;
+	zbcx,zbcy,zbwidth,zbhight:integer;
+	zbmidx,zbmidy:integer;
+  bts:boolean;
+	e,g:boolean;
+  st:string;
+  preview:draw;
+
+procedure zbplot;
+begin
+	setwritemode(xorput);
+	setcolor(7);
+	rectangle(zbx1,zby1,zbx2,zby2);
+	setwritemode(normalput);
+end;
+
+{procedure updatereal;
+var
+	rmx,rmy,rcx,rcy : extended;
+
+begin
+	rcx := SXtoX(zbcx+x1);
+	rcy := SYtoY(zbcy+y1);
+  rm}
+
+procedure chdims(newwid,newhight:integer);
+begin
+	zbplot;
+	if (newhight >= 0) or (zbhight>=15) then begin
+		if (newwid >= 0) or (zbwidth>=15+ratio*15) then zbwidth := zbwidth+newwid;
+		zbhight := zbhight+newhight;
+  	zbmidx := zbwidth div 2;
+		zbmidy := zbhight div 2;
+    bts := (zbwidth > width) and (zbhight > hight);
+		ratio := zbwidth / zbhight;
+		zbx1 := zbcx-zbmidx;
+		zbx2 := zbcx+zbmidx;
+		zby1 := zbcy-zbmidy;
+		zby2 := zbcy+zbmidy;
+  end;
+	zbplot;
+end;
+
+procedure mzoom(newzoom:integer);
+begin
+  if bts then newzoom := newzoom * ZoomOutRatio;
+	chdims(round(ratio*newzoom),newzoom);
+end;
+
+procedure mmove(dx,dy:integer);
+begin
+	zbplot;
+  if bts then begin
+  	dx := dx*ZoomOutRatio;
+    dy := dy*ZoomOutRatio;
+  end;
+	zbcx := zbcx+dx;
+	zbcy := zbcy+dy;
+	zbx1 := zbcx-zbmidx;
+	zbx2 := zbcx+zbmidx;
+	zby1 := zbcy-zbmidy;
+	zby2 := zbcy+zbmidy;
+	zbplot;
+end;
+
+begin
+  form^.gets(st);
+  ratio := width / hight;
+  with preview do begin
+    zbx1 := round(50*ratio);
+  	init(swidth div 2 - zbx1,20,swidth div 2 + zbx1,120);
+    setmcolor(14,15,9);
+    axes_text := false;
+    setfunc(st);
+    assign(minx,miny,maxx,maxy);
+    getready;
+  	if ZoomBoxPreview then display;
+    drawonassign := true;
+  end;
+	zbx1 := x1;
+	zbx2 := x2;
+	zby1 := y1;
+	zby2 := y2;
+	zbcx := cx;
+	zbcy := cy;
+	zbmidx := zbwidth div 2;
+	zbmidy := zbhight div 2;
+	zbwidth := width;
+	zbhight := hight;
+	ratio := zbwidth / zbhight;
+	mouse.mwindow(x1,y1,x2,y2);
+	mouse.erase;
+	e := false;
+	g := false;
+	zbplot;
+	repeat
+		getkeyevent(ev);
+		if ev.what = evkeydown then begin
+			case ev.keycode of
+				kbpgup    	: mzoom(-5);
+				kbpgdn 			: mzoom(5);
+				kbctrlpgup  : mzoom(-15);
+				kbctrlpgdn  : mzoom(15);
+				kbup				: mmove(0,-1);
+				kbdown 			: mmove(0,1);
+				kbleft	  	: mmove(-1,0);
+				kbright 		: mmove(1,0);
+				kbctrlleft 	: mmove(-5,0);
+				kbctrlright	: mmove(5,0);
+				kbctrlhome  : chdims(0,5);
+				kbctrlend   : chdims(0,-5);
+				kbctrlins   : chdims(5,0);
+				kbctrldel   : chdims(-5,0);
+        kbF1        : DoTheHelp(18);
+        kbF2        : preview.erase;
+				kbenter     : g := true;
+				kbesc       : e := true;
+			end;
+    	preview.assign(SXtoX(zbx1)+minx,SXtoX(zbx2),SYtoY(zby1)-miny,SYtoY(zby2));
+		end;
+		mouse.update;
+		if mouse.changed then begin
+			if mouse.buttompressed[1] then begin
+				if abs(mouse.xmove)-3 > abs(mouse.ymove) then begin
+					chdims(mouse.xmove,0);
+				end else mzoom(mouse.ymove);
+			end else if mouse.pressed[2] then g := true
+          else if mouse.pressed[3] then e := true
+			else mmove(mouse.xmove,mouse.ymove);
+    	preview.assign(SXtoX(zbx1),SXtoX(zbx2),SYtoY(zby1),SYtoY(zby2));
+		end;
+	until e or g;
+  preview.bye;
+	zbplot;
+	if g then begin
+    with preview do	userdraw.assign(minx,maxx,miny,maxy);
+	end;
+end;
+
+procedure UserDraw.usermenu;
+{ -----------------------Shows a menu    }
+(*       M E N U   C O M M A N D S      *)
+const
+	DoFunctionFill  = 1;
+	DoAutoFit       = 2;
+	DoAxes          = 3;
+	DoAxesText      = 8;
+	DoCalibarate    = 4;
+	Doreset         = 5;
+	DoRanges			  = 6;
+  DoZoomBox				= 7;
+  DoCompare       = 11;
+  DoCompareLink   = 12;
+  DoInvestigate   = 13;
+  DoColorize      = 18;
+  DoReturn        = 0;
+	DoRestore       = 14;
+  DoSave          = 15;
+  DoSaveimg       = 17;
+	DoExit          = 9;
+  DoMenu1	 				= 31;
+  DoMenu2         = 32;
+  DoMenu3         = 33;
+
+var themenu:menu;
+	selected:integer;
+
+function ison(value:boolean):string;
+{ returns * if on }
+begin
+	if value then ison := '*' else ison := '';
+end;
+
+
+begin
+	with themenu do begin
+		init(0,-20,right,up,miautoplacey+miwrap+misamesize);
+		setfont(MenuFont,1);
+		hideafter := true;
+		{ All Items -TEXT                          -CTL }
+    insert('SAVE...'                     ,DoSave        );
+    insert('RESTORE...'                  ,DoRestore     );
+    insert('SAVE BITMAP...'              ,DoSaveimg     );
+		insert('AUTO FIT '                   ,DoAutoFit     );
+		insert('RANGES ...'                  ,DoRanges      );
+    insert('COLORIZE '+ison(tocolorize)  ,DoColorize    );
+    insert('INVESTIGATE'                 ,DoInvestigate );
+    insert('COMPARE MODE'+ison(comp_link),DoCompareLink );
+    insert('COMPARE FUNC...'             ,DoCompare     );
+		insert('FUNCTION  FILL'+ison(tofill) ,DoFunctionFill);
+		insert('SHOW AXES '+ison(not no_axes),DoAxes        );
+		insert('AXES LABELS '+ison(axes_text),DoAxesText    );
+		insert('ZOOM BOX ...'                ,DoZoomBox     );
+		insert('CALIBARATE'                  ,DoCalibarate  );
+		insert('RESET RANGES'                ,DoReset       );
+    insert('HELP'	                       ,DoHelp        );
+		insert('EXIT'                        ,DoExit        );
+		getready;
+	end;
+	case themenu.domenu of
+		DoAutoFit       :setautofit(not AutoFit);
+		DoFunctionFill  :toFill := not toFill;
+		DoReset         :begin
+                       individual := true;
+											 assign(oldminx,oldmaxx,oldminy,oldmaxy);
+    								 end;
+		DoAxes          :no_axes := not no_axes;
+		DoAxesText      :Axes_Text := not Axes_Text;
+		DoZoomBox       :begin
+											 zoombox;
+	                     display;
+                     end;
+		DoRanges        :begin
+											 GetRanges(minx,maxx,miny,maxy);
+                       fastdraw := false;
+                       assign(minx,maxx,miny,maxy);
+    								 end;
+    DoCompareLink   :begin
+    									 if compnum = 0 then inputCompare
+                       else begin
+												 tugglecomp;
+                         display;
+                       end;
+                     end;
+    DoCompare       :inputCompare;
+    DoColorize      :ToColorize := not ToColorize;
+    DoInvestigate   :begin
+		                   Investigate;
+                       mousecoord;
+                       if ev1.charcode ='`' then savebitmap;
+                     end;
+    DoHelp          :DoTheHelp(19);
+		DoCalibarate    :begin
+					  					 fastdraw := false;
+											 keytime.reset;
+											 draw_axes;
+											 zoom(jump,jump);
+											 zoom(-jump,-jump);
+											 box.display;
+                       draw_axes;
+											 timeout:= keytime.get*2;
+											 keytime.reset;
+										 end;
+		DoExit          : stop := true;
+  	DoSave          : save;
+    DoRestore       : restore;
+  	DoSaveimg       : savebitmap;
+	end;
+	themenu.bye;
+end;
+
+procedure userdraw.keyin;
+var
+	s:string;
+begin
+	if ev1.what = evkeydown then begin
+		case ev1.keycode of
+			kbdel:if jump = LargeZoomStep then jump := SmallZoomStep else jump:=LargeZoomStep;
+			kbup				:absscroll(0		, jump);
+			kbdown			:absscroll(0		,-jump);
+			kbleft			:absscroll(-jump,0);
+			kbright			:absscroll( jump,0);
+			kbpgup			:abszoom( jump, jump);
+			kbpgdn			:abszoom(-jump,-jump);
+			kbctrlleft	:abszoom(-jump,0);
+			kbctrlright	:abszoom( jump,0);
+			kbF1        :dothehelp(9);
+			kbesc       :stop:=true;
+      kbenter     :restore;
+			else begin
+				case ev1.charcode of { letter key }
+          '`'    :Savebitmap;
+          'S','s':Save;
+					'A','a':setautofit(on);
+					'F','f':FunctionFill := not FunctionFill;
+					'R','r':assign(oldminx,oldmaxx,oldminy,oldmaxy);
+					'M','m':usermenu;
+          'I','i':begin
+									  investigate;
+                    mousecoord;
+                    if ev1.charcode ='`' then savebitmap;
+                  end;
+          'Z','z':begin
+            				zoombox;
+	                  display;
+                  end;
+					'X','x':individual := not individual;
+          ' '    :begin
+          					form^.gets(s);
+										form^.sets(getinput(s));
+                    getready;
+                  end;
+          '='    :begin
+  									 if compnum = 0 then inputCompare
+                     else begin
+	  									 tugglecomp;
+                       display;
+                     end;
+                  end;
+         	'L','l':begin
+{	            box.display;
+							draw_axes;}
+							plothigh;
+			        t := false;
+     			    c := false;
+           	end;
+					'T','t':begin
+           		fastdraw := false;
+							keytime.reset;
+							draw_axes;
+							zoom(jump,jump);
+							zoom(-jump,-jump);
+							box.display;
+							draw_axes;
+              calculate(0);
+							timeout:= keytime.get*2;
+							keytime.reset;
+						end;
+				end;
+      end;
+ 		end;
+		keytime.reset;
+	end else c:=false;
+end;
+
+procedure userdraw.cycle;
+begin
+	if c then begin
+    fastdraw := true;
+    resolution := FastDrawRes;
+    display;
+  	t := true;
+	end;
+	if keytime.cycle(timeout) and t then begin
+    fastdraw := false;
+    resolution := 1;
+		t := false;
+		display;
+		if autohighresplot then plothigh;
+  	if tocolorize then colorize;
+	end;
+end;
+
+procedure userdraw.interactive;
+{ draw the graph + zoom and pan }
+var kbpressed:boolean;
+begin
+	oldminx:=minx;	oldminy:=miny;	oldmaxy:=maxy;	oldmaxx:=maxx;
+  kbpressed := false;
+	stop:=false;
+	jump:=5;
+	i:=1;
+  individual := true;
+	t := false;
+  c := false;
+{}getready;
+	keytime.init;	keytime.reset;
+	box.display;
+	draw_axes;
+{	zoom(jump,jump);
+	zoom(-jump,-jump);}
+	box.display;
+	draw_axes;
+	timeout:= keytime.get*2;
+	calculate(0);
+	plot(0);
+{}mouse.mwindow(x1,y1,x2,y2);
+	repeat
+		c:=true;
+		mouse.update;
+{}	if mouse.changed then begin
+			case mousecoord of
+       	crdNothing:mouse.update;
+        crdZoombox:begin
+										 zoombox;
+	                   display;
+                   end;
+        crdChanged:begin
+					getready;
+          display;
+        end;
+        crdMenu:begin
+					UserMenu;
+					display;
+				end;
+        crdKbd:kbpressed := true;
+       end;
+		end;
+		if not kbpressed then getkeyevent(ev1);
+  	kbpressed := false;
+  	keyin;
+  	cycle;
+	until stop;
+  fastdraw := false;
+  resolution := 1;
+	calculate(0);
+	if autohighresplot then	plothigh else plot(0);
+	if RangesReset then assign(oldminx,oldmaxx,oldminy,oldmaxy);
+  display;
+	mouse.setmousetype(arrow);
+	individual := true;
+
+end;
+
+procedure userdraw.colorize;
+{ minimum,maximum/going up,going down/intersect with axes }
+type
+	direction = (up,down,stay);
+var
+	thisdir,lastdir,nextdir:direction;
+{	 tp:extended; { This Point }
+{  lp:extended; { Last Point }
+{  np:extended; { Next Point }
+
+  tp:integer;
+  lp:integer;
+  np:integer;
+
+  i1,i2:integer;
+begin
+  i1 := x1+1;
+  thisdir := stay;
+  lastdir := stay;
+  nextdir := stay;
+  while i1 < x2-1 do begin
+    { points }
+    tp := YtoSY(form^.points[i1]);
+    np := YtoSY(form^.points[i1+1]);
+    if tp = -1 then begin
+			while YtoSY(form^.points[i1]) in [y1,y2] do inc(i1);
+	    tp := YtoSY(form^.points[i1]);
+    	np := YtoSY(form^.points[i1+1]);
+    end;
+
+    { direction }
+  	if np > tp then thisdir := up
+    else if np < tp then thisdir := down
+    else thisdir := stay;
+
+    if thisdir = stay then begin
+      i2 := 1;
+      lp := YtoSY(form^.points[i1-1]);
+    	i2 := i1+1;
+      np := YtoSY(form^.points[i2]);
+      while np = tp do begin
+      	inc(i2);
+        if i2 > x2 then np := -1 else np := YtoSY(form^.points[i2]);
+      end;
+	  	if (tp > lp) and (np > tp) then thisdir := up
+	    else if (tp < lp) and (np < tp) then thisdir := down
+	    else thisdir := stay;
+			if thisdir = up then setcolor(3)
+			else if thisdir = down then setcolor(4)
+   	  else if thisdir = stay then setcolor(13);
+		 	line(i1,YtoSY(form^.points[i1]),i2-1,YtoSY(form^.points[i2-1]));
+	    i1 := i2-1;
+    end;
+
+		{ colorize }
+		if thisdir = up then setcolor(3)
+		else if thisdir = down then setcolor(4);
+{    else if thisdir = stay then
+			setcolor(13);}
+
+		line(i1,YtoSY(form^.points[i1]),i1+1,YtoSY(form^.points[i1+1]));
+		if thisdir <> stay then begin
+			lastdir := thisdir;
+    end;
+	 	inc(i1);
+  end;
+end;
+
+procedure userdraw.inputcompare;
+{ let you enter another formula to compare }
+var
+	newform:string;
+  v : byte;
+
+begin
+  if complink then begin
+    comp[1]^.gets(newform);
+		while freecomp(0) do; { delete all comps }
+  end;
+	newform := getinput(newform);
+	setcomp(newform);
+end;
+
+procedure UserDraw.investigate;
+{ Investigate the graph }
+{ First colorize it, then figure out Where he goes up,down... }
+{ calculate surface }
+const
+	this=1;
+  last=2;
+  next=3;
+  dnext=4;
+
+type
+	dirlist = (up,down,point);
+  pointlist=(min,max,stay,CrX,CrY,CrCmp,none);
+var
+  Above,Below : Boolean;
+  Delta,LastDelta:real;
+  Rst:array [1..4] of extended;
+{  direction : Dirlist;}
+  h:integer;
+  R:extended;
+  l:byte;
+  Hstep:extended; { Half a step }
+  Lastflat:integer;
+  lastlong:boolean;
+  pnt,lp : pointlist;
+
+procedure print(p:pointlist;dx,dy:extended);
+var
+	fx,fy,ly:integer;
+  str:string;
+  offset:integer;
+begin
+  ly := YtoSY(dy);
+  if p = none then exit
+	else if p = max  then str := 'MAX:('+stry(dx,0,2)+','+stry(dy,0,3)+')'
+  else if p = min  then str := 'MIN:('+stry(dx,0,2)+','+stry(dy,0,3)+')'
+  else if p = crx   then begin str := 'X:('+stry(dx,0,3)+')';  if h mod 2=1 then p:=min else p := max end
+  else if p = cry   then begin str := 'Y:('+stry(dy,0,3)+')';  p := max; end
+  else if p = crcmp then begin str := '><:('+stry(dx,0,2)+','+stry(dy,0,3)+')'; p := max; end;
+  fx := XtoSX(dx)+x1;
+	offset := 10;
+  if (ly <= y1+2) then fy := y1 + 8      { Off screen }
+  else if (ly >= y2-2) then fy := y2 - 8
+	else begin
+		fy := YtoSY(dy);
+    if p=min then begin
+    	if (fy >= y2-15) then p:=max;
+    end else if p=max then
+    	if (fy <= y1+15) then p:=min;
+    if p=min then fy:=fy+offset
+    else fy := fy - offset;
+  end;
+
+  setcolor(11);
+	line(fx+1,ly-5,fx+1,ly+5);
+  setcolor(0);
+  outtextxy(fx+1,fy+1,str);
+  outtextxy(fx-1,fy+1,str);
+  outtextxy(fx+1,fy-1,str);
+  outtextxy(fx-1,fy-1,str);
+  setcolor(14);
+  outtextxy(fx,fy,str);
+	lastflat := fx+1;
+end;
+
+begin
+	if invgraphcolorize then colorize;
+  Hstep := xstep / InvestigatAccuracy;
+  R := minx;
+  LastFlat := -20;
+  lastlong := true;
+  rst[this] := form^.calc(R);
+  rst[last] := rst[this];
+  rst[next] := form^.calc(R+hstep);
+  rst[dnext]:= form^.calc(R+2*hstep);
+  delta := rst[this]-rst[last];
+  r := R+hstep;
+	settextstyle(2,horizdir,5);
+  settextjustify(centertext,centertext);
+  pnt := none;
+  h := 0;
+  while r < maxx do begin
+    lastdelta := delta;
+		rst[this] := form^.calc(R);
+	  rst[next] := form^.calc(R+hstep);
+  	rst[dnext]:= form^.calc(R+2*hstep);
+    { Investigation }
+    {* DIRECTIONS *}
+		delta := rst[this]-rst[last];
+   	pnt := none;
+  	if invshowminmax then begin
+    	if delta < 0 then begin
+      	if lastdelta > 0 then begin
+      		pnt := max;
+      	end;
+    	end else begin { Delta > 0 }
+      	if lastdelta < 0 then begin
+      		pnt := min
+      	end;
+    	end; { POINT checking }
+    end;
+    {* Cross Points *}
+    if invshowcrossing then begin
+			if (rst[last] <= 0) and (rst[this] >= 0) then if lp <> crX then pnt := CrX;
+    	if (rst[last] >= 0) and (rst[this] <= 0) then if lp <> crX then pnt := CrX;
+    	if (R - hstep <= 0) and (R  >= 0) then if lp <> crX then pnt := crY;
+    	if (R - hstep >= 0) and (R  <= 0) then if lp <> crX then pnt := CrY;
+    	if (pnt=crx) then begin
+      	pnt := none; l := 0;
+      	rst[last] := R-hstep; rst[next] := R+hstep;
+      	if form^.calc(rst[next]) < form^.calc(rst[last]) then rst[last] := R+hstep;	rst[next] := R-hstep;
+      	rst[this] := form^.calc((rst[next]+rst[last]) / 2);
+      	while (l <= 115) and (pnt <> CrX) do begin
+        	if abs(rst[this]) < 0.00005 then pnt := CrX;
+        	rst[dnext] := rst[this];
+        	if rst[this] > 0 then rst[next] := (rst[next]+rst[last]) / 2;
+        	if rst[this] < 0 then rst[last] := (rst[next]+rst[last]) / 2;
+        	rst[this] := form^.calc((rst[next]+rst[last]) / 2);
+        	if rst[this] = rst[dnext] then pnt := Crx;
+      		inc(l);
+      	end;
+      	pnt := crX;
+      	rst[last] := 0;
+      	rst[this] := form^.calc(R); rst[next] := form^.calc(R+hstep); rst[dnext]:= form^.calc(R+2*hstep);
+      	inc(h); { How many times crossed the X }
+    	end;
+    end; { Cross Checking }
+    if pnt = lp then pnt := none;
+		print(pnt,r,rst[last]);
+    if pnt = none then begin
+			R:=R+hstep;
+		  rst[last] := rst[this];
+    end;
+    lp := pnt;
+	end;
+end;
+
+{***********************************}
+function getinput(nf:string):string;
+{ get the formula from the user }
+const
+	msgstr='Y = ';
+var
+	st,st1,st2:string;
+	i : byte;
+	c:char;
+	msg:msgbox;
+	input:inputbox;
+	output:msgbox;
+	preview:draw;
+
+begin
+  st := nf;
+	espace(st);
+	st1 := st;
+  st2 := st;
+	mouse.erase;
+	with preview do begin
+		init(swidth div 2 - 50,shight div 2 - 200,swidth div 2 + 50,shight div 2 - 100);
+		assign(-20,-20,20,20);
+		axes_text:=false;
+    set3D(on,on);
+    set3Dmode(inside);
+		setfunc(st);
+		form^.gets(st1);
+    getready;
+    setmcolor(9,15,15);
+		display;
+	end;
+	with input do begin
+		init(msgstr,st,swidth div 2,shight div 2);
+		setmcolor(selectedfore,0,selectedback);
+		setbox(on,off);
+		set3D(on,on);
+		set3Dmode(inside);
+    resize(off,3,3);
+    settextoffset(0,-5);
+    filter := ucase;
+    setallselection;
+		display;
+	end;
+	with output do begin
+		init(msgstr+st1,swidth div 2,shight div 2 + 60);
+		setfont(1,1);
+		setmcolor(1,2,3);
+		setbox(on,off);
+		set3D(on,off);
+		set3Dmode(small);
+    resize(off,3,3);
+    setjustify(center);
+    settextoffset(0,-4);
+		display;
+	end;
+	repeat
+		with mouse do begin
+			update;
+			if buttompressed[1] then begin
+				if abs(xmove)-3 > abs(ymove) then preview.abszoom(xmove,0)
+				else preview.abszoom(-ymove,-ymove);
+			end else
+				preview.absscroll(-xmove,ymove);
+			if pressed[2] then preview.assign(-20,-20,20,20);
+			if pressed[3] then
+				with preview do no_axes := not no_axes;
+			if changed then preview.display;
+		end;
+		getkeyevent(ev);
+		if ev.what <> evnothing then begin
+			if ev.keycode = kbf1 then dothehelp(8);
+			with input do begin
+				sendkey(ev);
+				st1 := get;
+			end;
+			if st1 <> st then begin
+				st := st1;
+				with preview do begin
+					setfunc(st1);
+					form^.gets(st1);
+					display;
+				end;
+				output.chngmsg(msgstr+st1);
+			end else st := st1;
+		end;
+	until ev.charcode in[#13,#27];
+	input.bye;
+	output.bye;
+	preview.bye;
+  if ev.charcode = #27 then st1 := st2;
+{	oldformula:=st1;}
+  getinput := st1;
+end;
+
+end.
